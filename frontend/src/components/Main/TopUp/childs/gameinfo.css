@@ -1,0 +1,28 @@
+.center {
+    margin-top: 10%;
+}
+
+.paddingRemove {
+    padding: 0px;
+}
+
+@media only screen and (max-width: 770px) {
+    .image_prop {
+        width: 35%
+    }
+
+    .info_prop {
+        width: 70%;
+        font-size: 12px;
+    }
+
+    .imageGone {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 770px) {
+    .backCard {
+        display: none;
+    }
+}
