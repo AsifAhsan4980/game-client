@@ -13,8 +13,8 @@ const NavBar = () => {
     return (
         <>
             <div className="hide"><TopNav/></div>
-            <Navbar toggle={toggle}/>
-            <Sidebar isOpen={isOpen} toggle={toggle}/>
+            {/*<Navbar toggle={toggle}/>*/}
+            {/*<Sidebar isOpen={isOpen} toggle={toggle}/>*/}
 
 
         </>

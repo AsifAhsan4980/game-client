@@ -4,6 +4,7 @@ import GameCart from "../components/Main/Home/GameCart";
 import NavBar from "./NavBar";
 import Footer from "../components/Main/Footer";
 import { increaseVisitors } from '../Api/visitors';
+import HomeComp from "../components/Main/Home/HomeComp";
 
 const Home = () => {
     useEffect(() => {
@@ -12,8 +13,7 @@ const Home = () => {
     return (
         <>
             <NavBar />
-            <Carousol />
-            <GameCart />
+            <HomeComp/>
             <Footer />
         </>
     )

@@ -20,18 +20,6 @@ const GameList = ({data}) => {
                 <Card.Title className="text-dark bg-white text-center">
                     {data.gameName} {data.categoryName}
                 </Card.Title>
-                <Row className='mt-4'>
-                    <Col className="text-center text-lg">
-                        <Button variant="light">
-                            <AiOutlineLike size={24}/>
-                        </Button>
-                    </Col>
-                    <Col className="text-center">
-                        <Button variant="light">
-                            <AiOutlineShareAlt size={24}/>
-                        </Button>
-                    </Col>
-                </Row>
             </Card.Body>
         </Card>
     );
