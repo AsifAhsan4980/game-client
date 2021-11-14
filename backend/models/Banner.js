@@ -1,16 +1,15 @@
 const mongoose = require('mongoose')
 
 const ProductsSchema = new mongoose.Schema({
-        bannerName: {
+        image: {
             type: String,
-            required: [true, 'Please provide a Food Name'],
+            required: [true, 'Please upload a image'],
         },
         firstTitle: {
             type: String,
         },
-        description : {
+        secondTitle : {
             type: String,
-
         }
     },
     {

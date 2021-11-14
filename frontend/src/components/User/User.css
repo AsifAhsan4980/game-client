@@ -6,7 +6,39 @@
 /**
 Use a more readable tab size (opinionated).
 */
+.flex-c-m {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+}
 
+.login100-social-item {
+    font-size: 25px;
+    color: #000;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+    border: 1px solid #001d5f;
+}
+
+.login100-social-item:hover {
+    color: #fff;
+    background-color: #001d5f;
+}
 html {
     -moz-tab-size: 4;
     -o-tab-size: 4;

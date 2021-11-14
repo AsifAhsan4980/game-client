@@ -90,7 +90,7 @@ const Footer = () => {
                                 <div
                                     className="flex items-center justify-center flex-shrink-0 px-5 py-3 border-r border-white border-opacity-25"
                                     data-v-5b0427c1>
-                                    <v-icon name="phone" className="text-white w-5 h-5" data-v-5b0427c1></v-icon>
+                                    <v-icon name="phone" className="text-white w-5 h-5" data-v-5b0427c1/>
                                 </div>
                                 <div className="px-5 py-2.5" data-v-5b0427c1>
                                     <p className="text-white text-opacity-70 text-xs" data-v-5b0427c1>9AM - 10PM</p>
@@ -103,7 +103,7 @@ const Footer = () => {
                                 <div
                                     className="flex items-center justify-center flex-shrink-0 px-5 py-3 border-r border-white border-opacity-25"
                                     data-v-5b0427c1>
-                                    <v-icon name="phone" className="text-white w-5 h-5" data-v-5b0427c1></v-icon>
+                                    <v-icon name="phone" className="text-white w-5 h-5" data-v-5b0427c1/>
                                 </div>
                                 <div className="px-5 py-2.5" data-v-5b0427c1>
                                     <p className="text-white text-opacity-70 text-xs" data-v-5b0427c1>9AM - 10PM</p>
@@ -148,12 +148,12 @@ const Footer = () => {
                                 </a></div>
                             </div>
                         </div>
-                        <div className="text-center md:text-left" data-v-5b0427c1>
+                        <div className="text-left" data-v-5b0427c1>
                             <h3 className="title" data-v-5b0427c1>Stay connected</h3>
                             <p className="text-white font-semibold mb-1.5 text-sm" data-v-5b0427c1>
-                                Star Tech &amp; Engineering Ltd
+                                Bengal Software
                             </p> <span className="text-white text-opacity-70 text-sm" data-v-5b0427c1>
-                                    6th floor, 28 Kazi Nazrul Islam Ave,Navana Zohura Square, Dhaka 1000
+                                    2th floor, Adept K.R. Complex, Beside Jamuna Future Park, Bashundhara R/A, Main Gate, Dhaka
                                 </span>
                             <p className="text-white text-opacity-70 text-sm mt-2 mb-1.5" data-v-5b0427c1>Email:</p>
                             <p className="text-white font-semibold mb-1.5 text-sm" data-v-5b0427c1><a
@@ -190,9 +190,8 @@ const Footer = () => {
                         className="border-white border-opacity-25 border-t py-6 flex justify-center flex-wrap md:flex-nowrap md:justify-between mt-8"
                         data-v-5b0427c1>
                         <p className="text-white text-opacity-70 text-xs mb-1.5 md:mb-0" data-v-5b0427c1>
-                            © 2020 Star Tech &amp; Engineering Ltd | All rights reserved
-                        </p> <a href="index.html" className="text-sm text-white nuxt-link-active" data-v-5b0427c1>BD
-                        Games Bazar</a>
+                            © 2021 Bengal Software | All rights reserved
+                        </p> <a href="index.html" className="text-sm text-white nuxt-link-active" data-v-5b0427c1>Sizishop</a>
                     </div>
                 </div>
             </footer>
