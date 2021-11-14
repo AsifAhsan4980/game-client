@@ -11,16 +11,13 @@ exports.createBanner = (req, res) => {
         return;
     }
     console.log()
-    const {productName, image, price, color, size, description} = req.body;
+    const {firstTitle, image, secondTitle} = req.body;
 
     // new product
     const productDetails = new Banners({
-        productName,
-        price,
         image,
-        color,
-        size,
-        description
+        firstTitle,
+        secondTitle
     })
 
     // save product in the database
@@ -37,23 +34,7 @@ exports.createBanner = (req, res) => {
 
 }
 
-// retrieve and return all product Item
-exports.findOneBanner = (req, res) => {
-    const productId = req.params._id
-    if (productId) {
-        Banners.findById(productId)
-            .then(data => {
-                if (!data) {
-                    res.status(404).send({message: "Not found food with id " + productId})
-                } else {
-                    res.send(data)
-                }
-            })
-            .catch(err => {
-                res.status(500).send({message: "Error retrieving user with id " + productId})
-            })
-    }
-}
+
 // retrieve and return a single product item
 exports.findAllBanner = (req, res) => {
 

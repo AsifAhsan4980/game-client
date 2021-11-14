@@ -108,35 +108,39 @@ const Login = () => {
             {/*</div>*/}
             <div class="mx-auto" data-v-791b20d9>
                 <div data-v-791b20d9>
-                    <section class="flex flex-col md:flex-row items-center md:justify-center py-10 md:py-6"
-                             data-v-791b20d9>
-                        <div class="bg-white w-full md:w-[450px] px-6 lg:px-8
-    flex items-start py-12 justify-center relative flex-shrink">
-
+                    <section class="flex flex-col md:flex-row items-center md:justify-center py-10 md:py-6" data-v-791b20d9>
+                        <div class="bg-white w-full md:w-[450px] px-6 lg:px-8 flex items-start py-12 justify-center relative flex-shrink">
                             <div class="w-full h-full">
                                 <h1 class="text-xl md:text-2xl font-bold leading-tight">
                                     Log in to your account
                                 </h1>
-
-                                <form method="post" class="mt-6">
+                                <Form onSubmit={handleSubmit} method="post" class="mt-6">
                                     <div><label class="block text-gray-700">Email Address</label>
-                                        <input type="email" placeholder="Enter Email Address" autofocus="autofocus"
-                                        autocomplete value=""
+                                        <input type="email" name="email" className="form-control" placeholder="Enter Email" value={email} required onChange={handleChange} autofocus="autofocus"
+                                        autoComplete={true}
                                         class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none"/>
                                     </div>
 
                                     <div class="mt-4"><label class="block text-gray-700">Password</label> <input
-                                        type="password" placeholder="Enter Password" value="" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
+                                        type="password" name="password" className="form-control" value={password} required onChange={handleChange} placeholder="Enter Password" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500
             focus:bg-white focus:outline-none"/></div>
 
                                     <div class="text-right mt-2"><a href="forgot-password.html"
                                                                     class="text-sm font-semibold text-gray-700 hover:text-primary-700 focus:text-primary-700">Forgot
                                         Password?</a></div>
-                                    <button type="submit" class="w-full block bg-primary-500 hover:bg-primary-400 focus:bg-primary-400 text-white font-semibold rounded-lg
+                                    <button onSubmit={handleSubmit} type="submit" class="w-full block bg-primary-500 hover:bg-primary-400 focus:bg-primary-400 text-white font-semibold rounded-lg
           px-4 py-3 mt-6">
                                         Log In
                                     </button>
-                                </form>
+                                    <div className="flex-c-m">
+                                        <a href="#" className="login100-social-item bg1">
+                                            <AiFillFacebook/>
+                                        </a>
+                                        <a href="#" className="login100-social-item bg3">
+                                            <AiOutlineGoogle/>
+                                        </a>
+                                    </div>
+                                </Form>
                                 <hr class="my-6 border-gray-300 w-full"/>
 
                                     <p class="mt-5 text-center">
