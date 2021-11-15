@@ -145,9 +145,9 @@ const Login = () => {
 
                                     <p class="mt-5 text-center">
                                         Need an account?
-                                        <a href="register.html"
+                                        <Link to='registration'
                                            class="text-primary-500 hover:text-primary-700 font-semibold">Create an
-                                            account</a>
+                                            account</Link>
                                     </p>
                             </div>
                         </div>
