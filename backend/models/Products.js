@@ -12,6 +12,10 @@ const ProductsSchema = new mongoose.Schema({
         images: {
             type: String,
         },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         topUp : [
             {
                 id : {

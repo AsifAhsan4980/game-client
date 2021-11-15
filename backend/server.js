@@ -35,7 +35,7 @@ app.use("/auth/google",require("./routes/authGoogleRouter"));
 app.use("/auth/facebook",require("./routes/authFacebookRouter"));
 // app.use("/admin/banner", require("./routes/banner"));
 app.use("/count", require("./routes/visitors"));
-
+app.use("/create/purchase", require("./routes/purchase"));
 
 app.use(errorHandler);
 

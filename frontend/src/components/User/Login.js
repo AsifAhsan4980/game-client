@@ -7,8 +7,6 @@ import {
     AiFillFacebook,
 } from "react-icons/ai";
 
-import google_icon from '../../assets/img/google.png'
-
 import './User.css';
 import {Form} from "react-bootstrap";
 

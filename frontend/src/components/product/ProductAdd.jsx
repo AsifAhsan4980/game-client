@@ -40,6 +40,8 @@ const ProductAdd = () => {
     }
     const handleInputChange = (e, index) => {
         const {name, value} = e.target;
+        console.log('name',name)
+        console.log('value',value)
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);

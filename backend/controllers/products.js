@@ -94,13 +94,14 @@ exports.update = (req, res) => {
 exports.remove = (req, res) => {
     const productId = req.params._id
 
-    Products.findByIdAndDelete(productId)
+    //Products.findByIdAndDelete(productId)
+    Products.updateOne({ _id: productId }, { disabled: true })
         .then(data => {
             if (!data) {
                 res.status(404).send({message: `Cannot Delete with id ${productId}. Maybe id is wrong`})
             } else {
                 res.send({
-                    message: "User was deleted successfully!"
+                    message: "Product was deleted successfully!"
                 })
             }
         })
