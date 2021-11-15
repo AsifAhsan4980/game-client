@@ -9,6 +9,6 @@ router.route('/').post(protect, createBanner);
 router.route('/').get(protect, findAllBanner);
 router.route('/:_id').get(protect, findOneBanner);
 router.route('/:_id').put(protect, updateBanner);
-router.route('/:_id').delete(protect, removeBanner);
+router.route('/delete/:_id').put(protect, removeBanner);
 
 module.exports = router

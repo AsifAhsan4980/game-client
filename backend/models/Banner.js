@@ -10,7 +10,11 @@ const ProductsSchema = new mongoose.Schema({
         },
         secondTitle : {
             type: String,
-        }
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
     },
     {
         timestamps : true
