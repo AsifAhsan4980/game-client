@@ -2,21 +2,22 @@ import React from "react";
 import "./search.css"
 import {Container, Navbar, Nav} from "react-bootstrap";
 import Search from "./search";
+import {Link} from "react-router-dom";
 
 const TopNav = () => {
     return (
         <>
-            <fragment data-v-70c6da4e data-v-791b20d9>
+            <div data-v-70c6da4e data-v-791b20d9>
                 <header className="bg-white md:bg-white md:pb-0 md:mb-0 sticky top-0 left-0 w-full z-[9999999]"
                         data-v-70c6da4e>
 
                     <div className="container mx-auto" data-v-70c6da4e>
                         <div className="flex items-center py-2 justify-between" data-v-70c6da4e>
-                            <div className="w-[130px] md:w-[160px]" data-v-70c6da4e><a href="index.html"
+                            <div className="w-[130px] md:w-[160px]" data-v-70c6da4e><Link to='/' href="index.html"
                                                                                        className="nuxt-link-active"
                                                                                        data-v-70c6da4e><img
-                                src="_nuxt/img/bd-games-bazar.4dd5bce.png" alt="SelfTen"
-                                className="md:block max-w-full h-auto object-cover" data-v-70c6da4e/></a>
+                                src="_nuxt/img/bd-games-bazar.4dd5bce.png" alt="Cizishop"
+                                className="md:block max-w-full h-auto object-cover" data-v-70c6da4e/></Link>
                             </div>
                             <div className="flex-grow px-12 hidden md:block" data-v-70c6da4e>
                                 <div className="w-full" data-v-70c6da4e>
@@ -57,11 +58,11 @@ const TopNav = () => {
                             </div>
                             <div data-v-70c6da4e>
                                 <ul className="flex flex-nowrap items-center header_top_right_ul" data-v-70c6da4e>
-                                    <li className="hidden xs:block" data-v-70c6da4e><a href="login.html"
+                                    <li className="hidden xs:block" data-v-70c6da4e><Link to='login'
                                                                                        aria-current="page"
                                                                                        className="nuxt-link-exact-active nuxt-link-active"
-                                                                                       data-v-70c6da4e>Login </a></li>
-                                    <li data-v-70c6da4e><a href="register.html" data-v-70c6da4e>Sign Up </a>
+                                                                                       data-v-70c6da4e>Login </Link></li>
+                                    <li data-v-70c6da4e><Link to='registration' href="register.html" data-v-70c6da4e>Sign Up </Link>
                                     </li>
 
                                     <div id="sidebar_overly"
@@ -135,7 +136,7 @@ const TopNav = () => {
                         </div>
                     </div>
                 </header>
-            </fragment>
+            </div>
 
         </>
     )
