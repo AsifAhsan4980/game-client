@@ -1,15 +1,8 @@
 const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
-
-
 const _ = require('lodash');
 // const formidable = require('formidable');
 const fs = require('fs');
-
-const _ = require('lodash');
-const formidable = require('formidable');
-const fs = require('fs');
-
 
 //create new product Item
 exports.create = (req, res) => {
@@ -24,8 +17,8 @@ exports.create = (req, res) => {
 
     // new product
     const productDetails = new Products({
-        gameName,
-        categoryName,
+        userId,
+        ,
         images,
         topUp,
         price,
@@ -81,8 +74,8 @@ exports.findAll = (req, res) => {
         .then(menu => {
             res.send(menu)
         }).catch(err => {
-            res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
-        })
+        res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
+    })
 }
 
 // Update a food item by product id

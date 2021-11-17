@@ -8,6 +8,10 @@ import Login from "./layouts/Login";
 import Registration from "./layouts/Registration";
 import {AuthProvider} from "./utils/auth";
 import Confirmation from "./views/Confirmation";
+import UserProfile from "./components/Main/User/UserProfile";
+import NavBar from "./layouts/NavBar";
+import UserWallet from "./components/Main/User/UserWallet";
+import MyOrder from "./components/Main/User/MyOrder";
 
 const App = () => {
     return (
@@ -17,12 +21,16 @@ const App = () => {
                     <AdminLayout/>
                 </AdminRoute>
             </Switch>
+            <NavBar/>
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/category/:id/:name" component={TopUp}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/registration" component={Registration}/>
                 <Route exact path="/category/:id/:name/conformation" component={Confirmation}/>
+                <Route exact path="/profile" component={UserProfile}/>
+                <Route exact path="/userWallet" component={UserWallet}/>
+                <Route exact path="/myOrder" component={MyOrder}/>
             </Switch>
         </AuthProvider>
     )
