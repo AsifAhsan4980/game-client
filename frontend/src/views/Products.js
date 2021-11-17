@@ -23,6 +23,8 @@ const Products = () => {
                 console.log(err.response);
             });
     }, []);
+
+    console.log('product',product)
     return (
         <>
             <Button variant="primary" className="mb-4" onClick={handleShow}>

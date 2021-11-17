@@ -91,7 +91,7 @@ const ProductList = ({data}) => {
                                 <Col>
                                     <Card>
                                         <Card.Body>
-                                            {data.images}
+                                            {data.image}
                                         </Card.Body>
                                     </Card>
                                 </Col>
