@@ -20,7 +20,7 @@ import UserProfile from "views/UserProfile.js";
 import TableList from "views/TableList.js";
 import Orders from "views/Orders";
 import Maps from "views/Maps.js";
-import Notifications from "views/Notifications.js";
+import Utility from "views/Utility";
 import Products from "./views/Products";
 
 const dashboardRoutes = [
@@ -67,10 +67,10 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/notifications",
-    name: "Notifications",
+    path: "/utility",
+    name: "Utility",
     icon: "nc-icon nc-bell-55",
-    component: Notifications,
+    component: Utility,
     layout: "/admin",
   },
 ];

@@ -363,9 +363,10 @@ const Register = () => {
                                         </form>
                                         <p className="mt-4 text-center">
                                             Have an account?
-                                            <a href="login.html"
-                                                className="text-primary-500 hover:text-primary-700 font-semibold">Login
-                                                here</a>
+
+                                            <Link to='login'
+                                               className="text-primary-500 hover:text-primary-700 font-semibold">Login
+                                                here</Link>
                                         </p>
                                     </div>
                                 </div>

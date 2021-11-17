@@ -1,5 +1,6 @@
 const Banners = require('../models/Banner')
 const ErrorResponse = require("../utils/errorResponse")
+const Products = require("../models/Products");
 
 
 //create new product Item
@@ -34,7 +35,23 @@ exports.createBanner = (req, res) => {
 
 }
 
-
+// retrieve and return all product Item
+exports.findOneBanner = (req, res) => {
+    const bannerId = req.params._id
+    if (bannerId) {
+        Products.findById(bannerId)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({message: "Not found food with id " + bannerId})
+                } else {
+                    res.send(data)
+                }
+            })
+            .catch(err => {
+                res.status(500).send({message: "Error retrieving user with id " + bannerId})
+            })
+    }
+}
 // retrieve and return a single product item
 exports.findAllBanner = (req, res) => {
 
