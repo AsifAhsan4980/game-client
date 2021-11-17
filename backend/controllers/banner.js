@@ -89,13 +89,14 @@ exports.updateBanner = (req, res) => {
 exports.removeBanner = (req, res) => {
     const productId = req.params._id
 
-    Banners.findByIdAndDelete(productId)
+    //Banners.findByIdAndDelete(productId)
+    Banners.updateOne({ _id: productId }, { disabled: true })
         .then(data => {
             if (!data) {
                 res.status(404).send({message: `Cannot Delete with id ${productId}. Maybe id is wrong`})
             } else {
                 res.send({
-                    message: "User was deleted successfully!"
+                    message: "Banner was deleted successfully!"
                 })
             }
         })

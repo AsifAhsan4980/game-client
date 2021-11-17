@@ -32,10 +32,10 @@ function TableList() {
 
   const deleteUserById = (id) => () => {
     deleteUser(userDetails.token, id)
-    .then((response) => {
-      setSuccess(true),
-        setMessage('User Delete Successfully')
-    })
+      .then((response) => {
+        setSuccess(true),
+          setMessage('User Delete Successfully')
+      })
   }
 
   const showMore = () => {
@@ -92,14 +92,16 @@ function TableList() {
                   <tbody>
                     {users && users.slice(0, visibleAdmin).map(user => {
                       if (user.role === 'admin') {
-                        return (
-                          <tr>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
-                            <td>{user.phonenumber}</td>
-                            <td>{user.role}</td>
-                          </tr>
-                        )
+                        if (user.disabled === false) {
+                          return (
+                            <tr>
+                              <td>{user.username}</td>
+                              <td>{user.email}</td>
+                              <td>{user.phonenumber}</td>
+                              <td>{user.role}</td>
+                            </tr>
+                          )
+                        }
                       }
                     })}
                   </tbody>
@@ -133,30 +135,32 @@ function TableList() {
                   <tbody>
                     {users && users.slice(0, visible).map((user, index) => {
                       if (user.role === 'admin' || user.role === 'user') {
-                        return (
-                          <tr>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
-                            <td>{user.phonenumber}</td>
-                            {(userDetails.role === 'admin') && (<>
-                              <td>{user.role}</td>
-                            </>)}
-                            {(userDetails.role === 'superadmin') && (<>
-                              <td>
-                                <button id="role-btn" className="role-btn">{user.role}</button>
-                                <div className="dropdown">
-                                  <button className="role-btn" style={{ borderLeft: "1px solid #0d8bf2", width: '35px' }}>
-                                    <i className="fa fa-caret-down"></i>
-                                  </button>
-                                  <div id="role-dropdown" className="dropdown-content">
-                                    <p onClick={MakeRole(user)}>{user.role === "user" ? "admin" : "user"}</p>
+                        if (user.disabled === false) {
+                          return (
+                            <tr>
+                              <td>{user.username}</td>
+                              <td>{user.email}</td>
+                              <td>{user.phonenumber}</td>
+                              {(userDetails.role === 'admin') && (<>
+                                <td>{user.role}</td>
+                              </>)}
+                              {(userDetails.role === 'superadmin') && (<>
+                                <td>
+                                  <button id="role-btn" className="role-btn">{user.role}</button>
+                                  <div className="dropdown">
+                                    <button className="role-btn" style={{ borderLeft: "1px solid #0d8bf2", width: '35px' }}>
+                                      <i className="fa fa-caret-down"></i>
+                                    </button>
+                                    <div id="role-dropdown" className="dropdown-content">
+                                      <p onClick={MakeRole(user)}>{user.role === "user" ? "admin" : "user"}</p>
+                                    </div>
                                   </div>
-                                </div>
-                              </td>
-                              <td className="border-0"><button className='btn btn-danger' onClick={deleteUserById(user._id)}>Delete</button></td>
-                            </>)}
-                          </tr>
-                        )
+                                </td>
+                                <td className="border-0"><button className='btn btn-danger' onClick={deleteUserById(user._id)}>Delete</button></td>
+                              </>)}
+                            </tr>
+                          )
+                        }
                       }
                     })}
                   </tbody>
