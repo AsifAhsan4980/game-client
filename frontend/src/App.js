@@ -7,13 +7,14 @@ import TopUp from "./layouts/TopUp";
 import Login from "./layouts/Login";
 import Registration from "./layouts/Registration";
 import {AuthProvider} from "./utils/auth";
+import Confirmation from "./views/Confirmation";
 
-const App = ()=> {
-    return(
-        <><AuthProvider>
+const App = () => {
+    return (
+        <AuthProvider>
             <Switch>
                 <AdminRoute path="/admin">
-                    <AdminLayout />
+                    <AdminLayout/>
                 </AdminRoute>
             </Switch>
             <Switch>
@@ -21,10 +22,9 @@ const App = ()=> {
                 <Route exact path="/category/:id/:name" component={TopUp}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/registration" component={Registration}/>
+                <Route exact path="/category/:id/:name/conformation" component={Confirmation}/>
             </Switch>
         </AuthProvider>
-
-        </>
     )
 }
 export default App

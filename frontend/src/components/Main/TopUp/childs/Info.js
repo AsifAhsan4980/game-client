@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Badge, Card, Col, Form, Row, Fl} from "react-bootstrap";
 import {getProducts} from "../../../../Api";
 import "./gameinfo.css"
@@ -121,7 +121,6 @@ const GameInfo = () => {
                     </Card.Body>
                 </Card>
                 <Card className="mb-4">
-
                     <Card.Body>
                         <Form.Label>Select Recharge</Form.Label>
                         <Row>
@@ -151,9 +150,9 @@ const GameInfo = () => {
                         </div>
                     </Card.Body>
                 </Card>
-                <div className='d-flex justify-content-lg-end'>
+                <Link as={Link} to="conformation" className='d-flex justify-content-lg-end'>
                     <Button className="d-flex justify-content-center">Submit</Button>
-                </div>
+                </Link>
             </div>
         </>
     )
