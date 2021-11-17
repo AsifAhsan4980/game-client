@@ -28,6 +28,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import AdminLayout from "layouts/Admin.js";
 import App from "./App";
+import Confirm from "./components/Main/Confirmation/Confirm";
 
 ReactDOM.render(
   <BrowserRouter>
