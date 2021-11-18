@@ -5,7 +5,7 @@ const _ = require('lodash');
 const fs = require('fs');
 
 //create new product Item
-exports.create = (req, res) => {
+exports.createWallet = (req, res) => {
     // validate request
     if (!req.body) {
         res.status(400).send({ message: "Content can not be emtpy!" });
@@ -13,12 +13,11 @@ exports.create = (req, res) => {
     }
 
     console.log('Body',req.body)
-    const { gameName, categoryName, images, topUp, details, option, price, region, platform, publisher } = req.body;
+    const { userId, images, topUp, details, option, price, region, platform, publisher } = req.body;
 
     // new product
     const productDetails = new Products({
         userId,
-        ,
         images,
         topUp,
         price,
@@ -42,7 +41,7 @@ exports.create = (req, res) => {
         });
 }
 
-exports.getPhoto = async (req, res) => {
+exports.getWallet = async (req, res) => {
     const productId = req.params._id;
     const product = await Products.findById(productId)
         .select({ images: 1, _id: 0 })
@@ -51,7 +50,7 @@ exports.getPhoto = async (req, res) => {
 }
 
 // retrieve and return all product Item
-exports.findOne = (req, res) => {
+exports.findOneWallet = (req, res) => {
     const productId = req.params._id
     if (productId) {
         Products.findById(productId)
@@ -68,7 +67,7 @@ exports.findOne = (req, res) => {
     }
 }
 // retrieve and return a single product item
-exports.findAll = (req, res) => {
+exports.findAllWallet = (req, res) => {
 
     Products.find()
         .then(menu => {
@@ -79,7 +78,7 @@ exports.findAll = (req, res) => {
 }
 
 // Update a food item by product id
-exports.update = (req, res) => {
+exports.updateWallet = (req, res) => {
     if (!req.body) {
         return res
             .status(400)
@@ -101,7 +100,7 @@ exports.update = (req, res) => {
 }
 
 // Delete a food with specified product id in the request
-exports.remove = (req, res) => {
+exports.removeWallet = (req, res) => {
     const productId = req.params._id
 
     //Products.findByIdAndDelete(productId)

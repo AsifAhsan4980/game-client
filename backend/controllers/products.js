@@ -2,13 +2,11 @@ const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
 
 
+
 const _ = require('lodash');
 // const formidable = require('formidable');
 const fs = require('fs');
 
-const _ = require('lodash');
-const formidable = require('formidable');
-const fs = require('fs');
 
 
 //create new product Item
