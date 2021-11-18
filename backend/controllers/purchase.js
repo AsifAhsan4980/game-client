@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { Purchase } = require('../models/Purchase');
+const {Purchase} = require('../models/Purchase');
 
 module.exports.createNewPurchase = async (req, res) => {
     if (!req.body) {
