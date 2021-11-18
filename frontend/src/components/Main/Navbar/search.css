@@ -182,7 +182,6 @@ Forms
 2. Remove the margin in Firefox and Safari.
 */
 
-button,
 input,
 optgroup,
 select,
@@ -202,7 +201,7 @@ Remove the inheritance of text transform in Edge and Firefox.
 1. Remove the inheritance of text transform in Firefox.
 */
 
-button,
+
 select {
     /* 1 */
     text-transform: none;
@@ -212,12 +211,7 @@ select {
 Correct the inability to style clickable types in iOS and Safari.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-    -webkit-appearance: button;
-}
+
 
 /**
 Remove the inner border and padding in Firefox.
@@ -232,9 +226,7 @@ Remove the inner border and padding in Firefox.
 Restore the focus styles unset by the previous rule.
 */
 
-:-moz-focusring {
-    outline: 1px dotted ButtonText;
-}
+
 
 /**
 Remove the additional ':invalid' styles in Firefox.
@@ -265,10 +257,6 @@ progress {
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-    height: auto;
-}
 
 /**
 1. Correct the odd appearance in Chrome and Safari.
@@ -294,13 +282,6 @@ Remove the inner padding in Chrome and Safari on macOS.
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Change font properties to 'inherit' in Safari.
 */
-
-::-webkit-file-upload-button {
-    -webkit-appearance: button;
-    /* 1 */
-    font: inherit;
-    /* 2 */
-}
 
 /*
 Interactive
@@ -341,10 +322,7 @@ pre {
     margin: 0;
 }
 
-button {
-    background-color: transparent;
-    background-image: none;
-}
+
 
 fieldset {
     margin: 0;
@@ -470,11 +448,6 @@ textarea::placeholder {
     color: #CBD5E0;
 }
 
-button,
-[role="button"] {
-    cursor: pointer;
-}
-
 /**
 * Override legacy focus reset from Normalize with modern Firefox focus styles.
 *
@@ -519,15 +492,7 @@ a {
 * normalize.css.
 */
 
-button,
-input,
-optgroup,
-select,
-textarea {
-    padding: 0;
-    line-height: inherit;
-    color: inherit;
-}
+
 
 /**
 * Use the configured 'mono' font family for elements that
