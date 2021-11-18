@@ -1,12 +1,10 @@
 const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
-<<<<<<< Updated upstream
 
-=======
 const _ = require('lodash');
 // const formidable = require('formidable');
 const fs = require('fs');
->>>>>>> Stashed changes
+
 
 //create new product Item
 exports.create = (req, res) => {

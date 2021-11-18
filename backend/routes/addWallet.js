@@ -1,5 +1,5 @@
 const express = require('express');
-const {createWallet ,findAllWallet , findOneWallet, updateWallet, removeWallet} = require('../controllers/products');
+const {createWallet ,findAllWallet , findOneWallet, updateWallet, removeWallet} = require('../controllers/wallet');
 const {protect} = require("../middleware/auth");
 
 
