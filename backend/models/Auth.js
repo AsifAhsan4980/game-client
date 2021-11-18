@@ -76,12 +76,12 @@ UserSchema.methods.matchPasswords = async function (password) {
 }
 
 UserSchema.methods.getSignedJwtToken = function () {
-    return jwt.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET, {
+    return jwt.sign({ id: this._id, username: this.username, email: this.email, phonenumber: this.phonenumber, role: this.role }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE,
     });
 };
 UserSchema.methods.resetJwtToken = function () {
-    return jwt.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET, {
+    return jwt.sign({ id: this._id, username: this.username, email: this.email, phonenumber: this.phonenumber, role: this.role }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRE2,
     });
 };
