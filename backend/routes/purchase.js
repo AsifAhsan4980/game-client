@@ -1,9 +1,10 @@
 const express = require('express')
-const {createNewPurchase} = require('../controllers/purchase')
+const {createNewPurchase,getAllPurchase} = require('../controllers/purchase')
 const {protect} = require("../middleware/auth");
 
 const router = express.Router()
 
-router.route('/').post(createNewPurchase)
+router.route('/create').post(protect,createNewPurchase)
+router.route('/:id').get(protect,getAllPurchase)
 
 module.exports = router

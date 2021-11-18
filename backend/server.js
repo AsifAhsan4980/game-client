@@ -38,11 +38,7 @@ app.use("/count", require("./routes/visitors"));
 
 // app.use("/create/purchase", require("./routes/purchase"));
 app.use('/addWallet', require("./routes/addWallet"))
-
-
-
-
-app.use("/create/purchase", require("./routes/purchase"));
+app.use("/purchase", require("./routes/purchase"));
 
 
 app.use(errorHandler);
