@@ -22,6 +22,7 @@ import Orders from "views/Orders";
 import Maps from "views/Maps.js";
 import Utility from "views/Utility";
 import Products from "./views/Products";
+import OrderHandle from "./views/OrderHandle";
 
 const dashboardRoutes = [
   {
@@ -60,16 +61,16 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/maps",
-    name: "Maps",
-    icon: "nc-icon nc-pin-3",
-    component: Maps,
+    path: "/handleOrder",
+    name: "Handle Order",
+    icon: "nc-icon nc-bell-55",
+    component: OrderHandle,
     layout: "/admin",
   },
   {
     path: "/utility",
     name: "Utility",
-    icon: "nc-icon nc-bell-55",
+    icon: "nc-icon nc-notes",
     component: Utility,
     layout: "/admin",
   },
