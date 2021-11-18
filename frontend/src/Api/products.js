@@ -17,6 +17,13 @@ export const getOneProducts = (id) => {
     );
 };
 
+export const getAllProducts = () => {
+
+    return axios.get(
+        `http://localhost:3001/admin/product/`
+    );
+};
+
 export const updateProductss = (addProduct) => {
 
     const token = JSON.parse(localStorage.getItem('jwt'))
