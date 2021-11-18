@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
 import {addProductss} from "../../Api/products";
@@ -21,8 +21,8 @@ const ProductAdd = () => {
         gameName: '',
         categoryName: '',
         image: '',
-        details: detailsList,
-        topUp: inputList
+        details: [],
+        topUp: []
     });
 
 
@@ -37,18 +37,28 @@ const ProductAdd = () => {
         const list = [...detailsList];
         list[index][name] = value;
         setDetailsList(list)
+        setAddProduct({
+            ...addProduct,
+            details:detailsList
+        })
+        
     }
     const handleInputChange = (e, index) => {
         const {name, value} = e.target;
         const list = [...inputList];
         list[index][name] = value;
         setInputList(list);
+        setAddProduct({
+            ...addProduct,
+            topUp:inputList
+        })
     };
 
     const handleChange = (e, index) => {
         setAddProduct({
             ...addProduct,
             [e.target.name]: e.target.value,
+            
         })
     }
 

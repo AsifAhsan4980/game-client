@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const addProductss = (addProduct) => {
-
     const token = JSON.parse(localStorage.getItem('jwt'))
     return axios.post("http://localhost:3001/admin/product", addProduct, {
         headers: {
