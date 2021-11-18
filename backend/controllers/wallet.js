@@ -13,11 +13,12 @@ exports.createWallet = (req, res) => {
     }
 
     console.log('Body',req.body)
-    const { userId, availableBalance, totalOrder, totalSpend } = req.body;
+    const { userId, availableBalance, totalOrder, totalSpend, methodName } = req.body;
 
     // new product
     const productDetails = new Products({
         userId,
+        methodName,
         availableBalance,
         totalOrder,
         totalSpend
