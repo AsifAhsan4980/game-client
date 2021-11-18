@@ -6,10 +6,7 @@ import Footer from "../components/Main/Footer";
 const TopUp = () => {
     return (
         <>
-            <NavBar/>
             <TopUpComp/>
-            <Footer />
-
         </>
     )
 }
