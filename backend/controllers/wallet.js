@@ -13,19 +13,14 @@ exports.createWallet = (req, res) => {
     }
 
     console.log('Body',req.body)
-    const { userId, images, topUp, details, option, price, region, platform, publisher } = req.body;
+    const { userId, availableBalance, totalOrder, totalSpend } = req.body;
 
     // new product
     const productDetails = new Products({
         userId,
-        images,
-        topUp,
-        price,
-        option,
-        details,
-        region,
-        platform,
-        publisher
+        availableBalance,
+        totalOrder,
+        totalSpend
     })
 
     // save product in the database
@@ -41,28 +36,28 @@ exports.createWallet = (req, res) => {
         });
 }
 
-exports.getWallet = async (req, res) => {
-    const productId = req.params._id;
-    const product = await Products.findById(productId)
-        .select({ images: 1, _id: 0 })
-    res.set('Content-Type', product.images.contentType);
-    return res.status(200).send(product.images.data);
-}
+// exports.getWallet = async (req, res) => {
+//     const productId = req.params._id;
+//     const product = await Products.findById(productId)
+//         .select({ images: 1, _id: 0 })
+//     res.set('Content-Type', product.images.contentType);
+//     return res.status(200).send(product.images.data);
+// }
 
 // retrieve and return all product Item
 exports.findOneWallet = (req, res) => {
-    const productId = req.params._id
-    if (productId) {
-        Products.findById(productId)
+    const walletId = req.params._id
+    if (walletId) {
+        Products.findById(walletId)
             .then(data => {
                 if (!data) {
-                    res.status(404).send({ message: "Not found food with id " + productId })
+                    res.status(404).send({ message: "Not found food with id " + walletId })
                 } else {
                     res.send(data)
                 }
             })
             .catch(err => {
-                res.status(500).send({ message: "Error retrieving user with id " + productId })
+                res.status(500).send({ message: "Error retrieving user with id " + walletId })
             })
     }
 }
