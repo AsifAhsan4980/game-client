@@ -28,6 +28,7 @@ export const userInfo = () => {
     return { ...decoded, token: jwt }
 }
 
+
 const initialstate = {
     user: null,
 };
