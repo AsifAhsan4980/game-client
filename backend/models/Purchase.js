@@ -48,5 +48,9 @@ module.exports.Purchase = model('Purchase', Schema({
         type: Number,
         required: true,
     },
+    isComplete: {
+        type: Boolean,
+        default: false
+    },
 }, { timestamps: true }));
 
