@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
-import { getAllPurchase } from "../../../Api/purchase";
+import { getAllPurchaseById } from "../../../Api/purchase";
 import { userInfo } from '../../../utils/auth';
 
 const MyOrder = () => {
@@ -8,7 +8,7 @@ const MyOrder = () => {
     const userDetails = userInfo();
 
     useEffect(() => {
-        getAllPurchase(userDetails.token,userDetails.id)
+        getAllPurchaseById(userDetails.token,userDetails.id)
             .then(response => setPurchase(response.data))
             .catch(console.log('Failed to load!'));
     }, [])
