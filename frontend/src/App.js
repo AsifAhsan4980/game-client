@@ -15,7 +15,7 @@ import UserProfile from "./components/Main/User/UserProfile";
 import NavBar from "./layouts/NavBar";
 import UserWallet from "./components/Main/User/UserWallet";
 import MyOrder from "./components/Main/User/MyOrder";
-
+import Footer from './components/Main/Footer/index'
 
 const App = () => {
     return (
@@ -40,6 +40,7 @@ const App = () => {
                 <Route exact path="/myOrder" component={MyOrder}/>
 
             </Switch>
+            <Footer/>
         </AuthProvider>
     )
 }
