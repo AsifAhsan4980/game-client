@@ -29,6 +29,7 @@ app.use('/media/img/',express.static('media/img'));
 // parse request to body-parser
 app.use(bodyparser.urlencoded({ extended : true}))
 
+
 app.use('/admin', require('./routes/auth'));
 app.use("/admin", require("./routes/private"));
 app.use("/admin/user", require("./routes/user"));

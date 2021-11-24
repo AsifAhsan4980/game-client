@@ -45,7 +45,7 @@ const Orders = () => {
                                                     <tr>
                                                         <td>{index + 1}</td>
                                                         <td>{purchase.createdAt}</td>
-                                                        <td>{purchase.productId.gameName}</td>
+                                                        <td>{purchase.productId}</td>
                                                         <td>{purchase.Number} ({purchase.accountTye})</td>
                                                         <td>{purchase.product}</td>
                                                         <td>{purchase.transactionID} ({purchase.paymentType})</td>
@@ -85,7 +85,7 @@ const Orders = () => {
                                                     <tr>
                                                         <td>{index + 1}</td>
                                                         <td>{purchase.createdAt}</td>
-                                                        <td>{purchase.productId.gameName}</td>
+                                                        <td>{purchase.productId}</td>
                                                         <td>{purchase.Number} ({purchase.accountTye})</td>
                                                         <td>{purchase.product}</td>
                                                         <td>{purchase.transactionID} ({purchase.paymentType})</td>

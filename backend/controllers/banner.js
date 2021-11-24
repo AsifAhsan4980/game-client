@@ -38,13 +38,14 @@ const upload = require('../middleware/multer');
 
 module.exports.createBanner = async (req, res) => {
     upload(req, res, function (err) {
+        
         const { firstTitle, secondTitle } = req.body;
-        const productDetails = new Banners({
+        const banner = new Banners({
             image: `media/img/${req.file.filename}`,
             firstTitle,
             secondTitle
         })
-        productDetails.save()
+        banner.save()
             .then(data => {
                 //res.send(data)
                 res.status(200).send(data)

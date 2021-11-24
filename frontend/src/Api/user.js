@@ -3,7 +3,16 @@ import axios from "axios";
 
 export const getAllUser = (token) => {
     return axios.get("http://localhost:3001/admin/user/all_user",{
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":`Bearer ${token}`
+        }
+    })
+}
 
+
+export const getOneUser = (token,id) => {
+    return axios.get(`http://localhost:3001/admin/user/find/${id}`,{
         headers:{
             "Content-Type":"application/json",
             "Authorization":`Bearer ${token}`
