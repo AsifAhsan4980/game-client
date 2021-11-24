@@ -46,7 +46,8 @@ const ProductList = ({data}) => {
                         <Card.Img
                             variant="top"
                             className="cart_image"
-                            src={data.images}
+                            //src={data.images}
+                            src={`http://localhost:3001/${data.images}`}
                         />
                         <Card.Body>
                             <Card.Title className="text-dark bg-white text-center">

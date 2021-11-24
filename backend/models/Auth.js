@@ -41,8 +41,12 @@ const UserSchema = new mongoose.Schema({
         default: false
     },
     socketId: {
-        type: 'String',
+        type: String,
         default: null
+    },
+    profilePic: {
+        type: String,
+        default:null
     },
     role: {
         type: String,

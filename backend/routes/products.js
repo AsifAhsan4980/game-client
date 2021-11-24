@@ -1,11 +1,12 @@
 const express = require('express');
-const {create,findAll, findOne, update, remove} = require('../controllers/products');
+const {create,addProductImage,findAll, findOne, update, remove} = require('../controllers/products');
 const {protect} = require("../middleware/auth");
 
 
 const router = express.Router();
 
-router.route('/').post(protect,create);
+router.route('/add/:id').put(protect,create);
+router.route('/addProductImage').post(protect,addProductImage);
 router.route('/').get( findAll);
 router.route('/:_id').get( findOne);
 router.route('/:_id').put(protect, update);
