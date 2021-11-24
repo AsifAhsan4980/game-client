@@ -31,23 +31,7 @@ module.exports.Purchase = model('Purchase', Schema({
         type: String,
         required: true,
     },
-    paymentType: {
-        type: String,
-        required: true,
-    },
-    transactionID: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    mobileNumber: {
-        type: Number,
-        required: true,
-    },
-    amount: {
-        type: Number,
-        required: true,
-    },
+
     isComplete: {
         type: Boolean,
         default: false

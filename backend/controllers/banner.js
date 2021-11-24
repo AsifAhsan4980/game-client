@@ -4,47 +4,16 @@ const Products = require("../models/Products");
 const upload = require('../middleware/multer');
 
 
-//create new product Item
-/*exports.createBanner = (req, res) => {
-
-    // validate request
-    if (!req.body) {
-        res.status(400).send({message: "Content can not be emtpy!"});
-        return;
-    }
-    console.log()
-    const {firstTitle, image, secondTitle} = req.body;
-
-    // new product
-    const productDetails = new Banners({
-        image,
-        firstTitle,
-        secondTitle
-    })
-
-    // save product in the database
-    productDetails.save()
-        .then(data => {
-            //res.send(data)
-            res.status(200).send(data)
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating a create operation"
-            });
-        });
-
-}*/
-
 module.exports.createBanner = async (req, res) => {
     upload(req, res, function (err) {
+        
         const { firstTitle, secondTitle } = req.body;
-        const productDetails = new Banners({
+        const banner = new Banners({
             image: `media/img/${req.file.filename}`,
             firstTitle,
             secondTitle
         })
-        productDetails.save()
+        banner.save()
             .then(data => {
                 //res.send(data)
                 res.status(200).send(data)
@@ -89,6 +58,7 @@ exports.findAllBanner = (req, res) => {
     Banners.find()
         .then(menu => {
             res.send(menu)
+            console.log(menu)
         }).catch(err => {
             res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
         })

@@ -5,10 +5,10 @@ const ProductsSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        methodName : {
-            type: String,
-            required: true
-        },
+        // methodName : {
+        //     type: String,
+        //     required: true
+        // },
         availableBalance :  {
             type: Number,
         },
@@ -22,6 +22,23 @@ const ProductsSchema = new mongoose.Schema({
             type: Boolean,
             default: false
         },
+        // paymentType: {
+        //     type: String,
+        //     required: true,
+        // },
+        // transactionID: {
+        //     type: String,
+        //     required: true,
+        //     unique: true,
+        // },
+        // mobileNumber: {
+        //     type: Number,
+        //     required: true,
+        // },
+        // amount: {
+        //     type: Number,
+        //     required: true,
+        // },
     },
     {
         timestamps: true
@@ -30,4 +47,4 @@ const ProductsSchema = new mongoose.Schema({
 
 const Wallet= mongoose.model("Wallet", ProductsSchema)
 
-module.exports = Wallet;
+module.exports = Wallet

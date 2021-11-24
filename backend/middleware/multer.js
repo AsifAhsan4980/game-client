@@ -5,10 +5,9 @@ const multerStorage = multer.diskStorage({
         cb(null, 'media/img'); 
     },
     filename: function (req, file, cb) { 
-        console.log(file)
         const ext = file.mimetype.split("/")[1]; 
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const filename = `${file.filename}-${uniqueSuffix}.${ext}`;
+        const filename = `${file.originalname.split(".")[0]}-${uniqueSuffix}.${ext}`;
         cb(null, filename);
     }
 })

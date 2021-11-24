@@ -10,8 +10,8 @@ const ProductsSchema = new mongoose.Schema({
         required: [true, 'Please provide a product Name'],
     },
     images: {
-        data:Buffer,
-        contentType:String,
+        type: String,
+        default:null
     },
     disabled: {
         type: Boolean,

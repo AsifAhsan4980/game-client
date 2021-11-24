@@ -1,60 +1,91 @@
 const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
-
-const multer = require('multer')
-const upload = multer({dest : 'upload'})
-
+const upload = require('../middleware/multer');
 const _ = require('lodash');
-// const formidable = require('formidable');
-const fs = require('fs');
 
-const storage = multer.diskStorage({
-    destination: function(req, file, callback) {
-        callback(null, '/src/my-images');
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname);
-    }
-});
+
 
 //create new product Item
-exports.create = upload.single('productImage') ,(req, res) => {
-    console.log(req.file)
+exports.create = async(req, res) => {
     // validate request
     if (!req.body) {
         res.status(400).send({ message: "Content can not be emtpy!" });
         return;
     }
-
-    console.log('Body',req.body)
-    const { gameName, categoryName, images, topUp, details, option, price, region, platform, publisher } = req.body;
-
     // new product
-    const productDetails = new Products({
-        gameName,
-        categoryName,
-        images,
-        topUp,
-        price,
-        option,
-        details,
-        region,
-        platform,
-        publisher
-    })
+    try {
+        const updatedProduct = await Products.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set: req.body,
+            },
+            { new: true }
+        );
+        res.status(200).json(updatedProduct);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 
-    // save product in the database
-    productDetails.save()
-        .then(data => {
-            //res.send(data)
-            res.status(200).send(data)
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating a create operation"
-            });
-        });
 }
+
+exports.addProductImage = (req, res) => {
+    upload(req, res, function (err) {
+        const { gameName, categoryName } = req.body;
+
+        const product = new Products({
+            gameName,
+            categoryName,
+            images: `media/img/${req.file.filename}`,
+        })
+        product.save()
+            .then(data => {
+                //res.send(data)
+                res.status(200).send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while creating a create operation"
+                });
+            });
+    })
+}
+
+/*exports.create = (req, res) => {
+    console.log('req.body', req.body)
+    upload(req, res, function (err) {
+        // validate request
+        if (!req.body) {
+            res.status(400).send({ message: "Content can not be emtpy!" });
+            return;
+        }
+
+        const { gameName, categoryName, topUp, details, option, price, region, platform, publisher } = req.body;
+        console.log('req.body', req.body)
+        console.log('req.file', req.file)
+        const product = new Products({
+            //images: `media/img/${req.file.filename}`,
+            gameName,
+            categoryName,
+            topUp,
+            details,
+            option,
+            price,
+            region,
+            platform,
+            publisher
+        })
+        product.save()
+            .then(data => {
+                //res.send(data)
+                res.status(200).send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while creating a create operation"
+                });
+            });
+    })
+}*/
 
 exports.getImage = async (req, res) => {
     const productId = req.params._id;
@@ -88,8 +119,8 @@ exports.findAll = (req, res) => {
         .then(menu => {
             res.send(menu)
         }).catch(err => {
-            res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
-        })
+        res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
+    })
 }
 
 // Update a food item by product id

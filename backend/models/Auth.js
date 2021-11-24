@@ -41,13 +41,20 @@ const UserSchema = new mongoose.Schema({
         default: false
     },
     socketId: {
-        type: 'String',
+        type: String,
         default: null
+    },
+    profilePic: {
+        type: String,
+        default:null
     },
     role: {
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
+    },
+    walletId: {
+        type: String
     },
     disabled: {
         type: Boolean,
