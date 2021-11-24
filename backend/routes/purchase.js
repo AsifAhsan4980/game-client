@@ -6,9 +6,9 @@ const {handleOrder} = require("../controllers/handleOrder");
 const router = express.Router()
 
 
-router.route('/create').post(protect,createNewPurchase)
+router.route('/create').post(protect,createNewPurchase, handleOrder)
 router.route('/:id').get(protect,getAllPurchaseById)
-router.route('/').get(protect,getAllPurchase)
+router.route('/').get(protect,getAllPurchase, )
 
 
 

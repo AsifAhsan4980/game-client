@@ -28,6 +28,7 @@ module.exports.Purchase = model('Purchase', Schema({
         required: true,
     },
     product: {
+
         option: {
             type: String,
         },

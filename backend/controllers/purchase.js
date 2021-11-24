@@ -6,10 +6,10 @@ module.exports.createNewPurchase = async (req, res) => {
         res.status(400).send({message: "Content can not be emtpy!"});
         return;
     }
-    const purchase = new Purchase(_.pick(req.body, ['userId','productId', 'accountTye', 'Number', 'Password', 'backupCode', 'product', 'paymentType', 'transactionID', 'mobileNumber', 'amount','isComplete']));
+    const purchase = new Purchase(_.pick(req.body, ['userId','productId', 'accountTye', 'Number', 'Password', 'backupCode', 'product','isComplete']));
     const result = await purchase.save();
     return res.status(201).send({
-        purchase: _.pick(result, ['userId','productId', 'accountTye', 'Number', 'Password', 'backupCode', 'product', 'paymentType', 'transactionID', 'mobileNumber', 'amount','isComplete'])
+        purchase: _.pick(result, ['userId','productId', 'accountTye', 'Number', 'Password', 'backupCode', 'product',  'isComplete'])
     })
 }
 
