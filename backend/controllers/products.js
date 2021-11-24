@@ -56,7 +56,7 @@ exports.create = upload.single('productImage') ,(req, res) => {
         });
 }
 
-exports.getPhoto = async (req, res) => {
+exports.getImage = async (req, res) => {
     const productId = req.params._id;
     const product = await Products.findById(productId)
         .select({ images: 1, _id: 0 })

@@ -1,4 +1,4 @@
-import axios from "axios";
+/*import axios from "axios";
 
 export const addBanners = (addBanner) => {
 
@@ -9,4 +9,16 @@ export const addBanners = (addBanner) => {
             'Authorization': `Bearer ${token}`
         }
     })
-};
+};*/
+
+import axios from "axios";
+
+export const addBanners = (token,addBanner) => {
+
+    return axios.post("http://localhost:3001/admin/banner", addBanner, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
