@@ -1,10 +1,11 @@
 const Banners = require('../models/Banner')
 const ErrorResponse = require("../utils/errorResponse")
 const Products = require("../models/Products");
+const upload = require('../middleware/multer');
 
 
 //create new product Item
-exports.createBanner = (req, res) => {
+/*exports.createBanner = (req, res) => {
 
     // validate request
     if (!req.body) {
@@ -33,7 +34,37 @@ exports.createBanner = (req, res) => {
             });
         });
 
+}*/
+
+module.exports.createBanner = async (req, res) => {
+    upload(req, res, function (err) {
+        const { firstTitle, secondTitle } = req.body;
+        const productDetails = new Banners({
+            image: `media/img/${req.file.filename}`,
+            firstTitle,
+            secondTitle
+        })
+        productDetails.save()
+            .then(data => {
+                //res.send(data)
+                res.status(200).send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occurred while creating a create operation"
+                });
+            });
+        
+    })
 }
+
+exports.getImage = async (req, res) => {
+    const bannerId = req.params._id;
+    const banner = await Banners.findById(bannerId)
+    .select({ image: 1, _id: 0 })
+    return res.status(200).send(banner)
+}
+
 
 // retrieve and return all product Item
 exports.findOneBanner = (req, res) => {
@@ -42,13 +73,13 @@ exports.findOneBanner = (req, res) => {
         Products.findById(bannerId)
             .then(data => {
                 if (!data) {
-                    res.status(404).send({message: "Not found food with id " + bannerId})
+                    res.status(404).send({ message: "Not found food with id " + bannerId })
                 } else {
                     res.send(data)
                 }
             })
             .catch(err => {
-                res.status(500).send({message: "Error retrieving user with id " + bannerId})
+                res.status(500).send({ message: "Error retrieving user with id " + bannerId })
             })
     }
 }
@@ -59,8 +90,8 @@ exports.findAllBanner = (req, res) => {
         .then(menu => {
             res.send(menu)
         }).catch(err => {
-        res.status(500).send({message: err.message || "Error Occurred while retrieving user information"})
-    })
+            res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
+        })
 }
 
 // Update a food item by product id
@@ -68,20 +99,20 @@ exports.updateBanner = (req, res) => {
     if (!req.body) {
         return res
             .status(400)
-            .send({message: "Data to update can not be empty"})
+            .send({ message: "Data to update can not be empty" })
     }
 
     const id = req.params._id;
-    Banners.findByIdAndUpdate(id, req.body, {useFindAndModify: false})
+    Banners.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
-                res.status(404).send({message: `Cannot Update user with ${id}. Maybe user not found!`})
+                res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
             } else {
                 res.send(data)
             }
         })
         .catch(err => {
-            res.status(500).send({message: "Error Update user information"})
+            res.status(500).send({ message: "Error Update user information" })
         })
 }
 
@@ -93,7 +124,7 @@ exports.removeBanner = (req, res) => {
     Banners.updateOne({ _id: productId }, { disabled: true })
         .then(data => {
             if (!data) {
-                res.status(404).send({message: `Cannot Delete with id ${productId}. Maybe id is wrong`})
+                res.status(404).send({ message: `Cannot Delete with id ${productId}. Maybe id is wrong` })
             } else {
                 res.send({
                     message: "Banner was deleted successfully!"

@@ -2,8 +2,11 @@ import React, {Fragment} from "react";
 import {Button, Card, Col, Container, ListGroup, ListGroupItem, Row} from "react-bootstrap";
 import {AiOutlineUser} from "react-icons/ai"
 import "./userinfo.css"
+import {userInfo} from '../../../utils/auth';
 
 const UserProfile = () => {
+    const {username,email,phonenumber}=userInfo(); 
+
     return(
         <Fragment>
             <Container>
@@ -13,8 +16,8 @@ const UserProfile = () => {
                             <Card.Body >
                                 <div className='d-inline justify-content-center'>
                                     <AiOutlineUser className="icon_style justify-content-center"/>
-                                    <div><h3>Asif Ahsan</h3></div>
-                                    <div>+8801685436578</div>
+                                    <div><h3>{username}</h3></div>
+                                    <div>{phonenumber}</div>
                                     <Button variant="outline-primary">৳   0</Button>
                                 </div>
 
@@ -27,9 +30,9 @@ const UserProfile = () => {
                                 <ListGroupItem>User Info</ListGroupItem>
                             </ListGroup>
                             <Card.Body>
-                                <div>Asif Ahsan</div>
-                                <div>asifahsan727@gmail.com</div>
-                                <div>+8801685436578</div>
+                                <div>{username}</div>
+                                <div>{email}</div>
+                                <div>{phonenumber}</div>
                             </Card.Body>
                         </Card>
                     </Col>

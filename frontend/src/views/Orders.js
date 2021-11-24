@@ -1,15 +1,27 @@
-import React from "react";
-import {Card, Col, Container, Row, Table} from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Col, Container, Row, Table } from "react-bootstrap";
+import { getAllPurchase } from "../Api/purchase";
+import { userInfo } from '../utils/auth';
 
-const Orders  = () => {
-    return(
+
+const Orders = () => {
+    const [purchase, setPurchase] = useState([]);
+    const userDetails = userInfo();
+
+    useEffect(() => {
+        getAllPurchase(userDetails.token)
+            .then(response => setPurchase(response.data))
+            .catch(console.log('Failed to load!'));
+    }, [])
+
+    return (
         <>
             <Container fluid>
                 <Row>
                     <Col md="12">
                         <Card className="strpied-tabled-with-hover">
                             <Card.Header>
-                                <Card.Title as="h4">Admin List</Card.Title>
+                                <Card.Title as="h4">Active Orders</Card.Title>
                                 <p className="card-category">
                                     Due Orders
                                 </p>
@@ -17,57 +29,30 @@ const Orders  = () => {
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover table-striped">
                                     <thead>
-                                    <tr>
-                                        <th className="border-0">ID</th>
-                                        <th className="border-0">Name</th>
-                                        <th className="border-0">orders</th>
-                                        <th className="border-0">Country</th>
-                                        <th className="border-0">City</th>
-                                    </tr>
+                                        <tr>
+                                            <th className="border-0">#</th>
+                                            <th className="border-0">Date</th>
+                                            <th className="border-0">Product Name</th>
+                                            <th className="border-0">Payment Number</th>
+                                            <th className="border-0">Purchased Package</th>
+                                            <th className="border-0">Transaction ID</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Minerva Hooper</td>
-                                        <td>$23,789</td>
-                                        <td>Curaçao</td>
-                                        <td>Sinaai-Waas</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Sage Rodriguez</td>
-                                        <td>$56,142</td>
-                                        <td>Netherlands</td>
-                                        <td>Baileux</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Philip Chaney</td>
-                                        <td>$38,735</td>
-                                        <td>Korea, South</td>
-                                        <td>Overland Park</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Doris Greene</td>
-                                        <td>$63,542</td>
-                                        <td>Malawi</td>
-                                        <td>Feldkirchen in Kärnten</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Mason Porter</td>
-                                        <td>$78,615</td>
-                                        <td>Chile</td>
-                                        <td>Gloucester</td>
-                                    </tr>
+                                        {purchase && purchase.map((purchase, index) => {
+                                            if (purchase.isComplete === false) {
+                                                return (
+                                                    <tr>
+                                                        <td>{index + 1}</td>
+                                                        <td>{purchase.createdAt}</td>
+                                                        <td>{purchase.productId.gameName}</td>
+                                                        <td>{purchase.Number} ({purchase.accountTye})</td>
+                                                        <td>{purchase.product}</td>
+                                                        <td>{purchase.transactionID} ({purchase.paymentType})</td>
+                                                    </tr>
+                                                )
+                                            }
+                                        })}
                                     </tbody>
                                 </Table>
                             </Card.Body>
@@ -76,7 +61,7 @@ const Orders  = () => {
                     <Col md="12">
                         <Card className="card-plain table-plain-bg">
                             <Card.Header>
-                                <Card.Title as="h4">User</Card.Title>
+                                <Card.Title as="h4">Completed Orders</Card.Title>
                                 <p className="card-category">
                                     Completed Orders
                                 </p>
@@ -84,57 +69,30 @@ const Orders  = () => {
                             <Card.Body className="table-full-width table-responsive px-0">
                                 <Table className="table-hover">
                                     <thead>
-                                    <tr>
-                                        <th className="border-0">ID</th>
-                                        <th className="border-0">Name</th>
-                                        <th className="border-0">Orders</th>
-                                        <th className="border-0">Country</th>
-                                        <th className="border-0">City</th>
-                                    </tr>
+                                        <tr>
+                                            <th className="border-0">#</th>
+                                            <th className="border-0">Date</th>
+                                            <th className="border-0">Product Name</th>
+                                            <th className="border-0">Payment Number</th>
+                                            <th className="border-0">Purchased Package</th>
+                                            <th className="border-0">Transaction ID</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
-                                        <td>Niger</td>
-                                        <td>Oud-Turnhout</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Minerva Hooper</td>
-                                        <td>$23,789</td>
-                                        <td>Curaçao</td>
-                                        <td>Sinaai-Waas</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Sage Rodriguez</td>
-                                        <td>$56,142</td>
-                                        <td>Netherlands</td>
-                                        <td>Baileux</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Philip Chaney</td>
-                                        <td>$38,735</td>
-                                        <td>Korea, South</td>
-                                        <td>Overland Park</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Doris Greene</td>
-                                        <td>$63,542</td>
-                                        <td>Malawi</td>
-                                        <td>Feldkirchen in Kärnten</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Mason Porter</td>
-                                        <td>$78,615</td>
-                                        <td>Chile</td>
-                                        <td>Gloucester</td>
-                                    </tr>
+                                        {purchase && purchase.map((purchase, index) => {
+                                            if (purchase.isComplete === true) {
+                                                return (
+                                                    <tr>
+                                                        <td>{index + 1}</td>
+                                                        <td>{purchase.createdAt}</td>
+                                                        <td>{purchase.productId.gameName}</td>
+                                                        <td>{purchase.Number} ({purchase.accountTye})</td>
+                                                        <td>{purchase.product}</td>
+                                                        <td>{purchase.transactionID} ({purchase.paymentType})</td>
+                                                    </tr>
+                                                )
+                                            }
+                                        })}
                                     </tbody>
                                 </Table>
                             </Card.Body>
