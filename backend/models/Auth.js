@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const {Schema} = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -46,6 +47,11 @@ const UserSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String,
+        default:null
+    },
+    wallet:{
+        type: Schema.Types.ObjectId,
+        ref: "Wallet",
         default:null
     },
     role: {

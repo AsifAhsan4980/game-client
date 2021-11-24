@@ -28,26 +28,14 @@ module.exports.Purchase = model('Purchase', Schema({
         required: true,
     },
     product: {
-        type: String,
-        required: true,
+        option: {
+            type: String,
+        },
+        price: {
+            type: Number,
+        }
     },
-    paymentType: {
-        type: String,
-        required: true,
-    },
-    transactionID: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    mobileNumber: {
-        type: Number,
-        required: true,
-    },
-    amount: {
-        type: Number,
-        required: true,
-    },
+    
     isComplete: {
         type: Boolean,
         default: false

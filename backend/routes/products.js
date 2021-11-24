@@ -10,7 +10,7 @@ const router = express.Router();
 router.route('/add/:id').put(protect,create);
 router.route('/addProductImage').post(protect,addProductImage);
 
-router.route('/').post( protect,create);
+//router.route('/').post( protect,create);
 
 router.route('/').get( findAll);
 router.route('/:_id').get( findOne);

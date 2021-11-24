@@ -44,6 +44,9 @@ app.use("/count", require("./routes/visitors"));
 app.use('/addWallet', require("./routes/addWallet"))
 app.use("/purchase", require("./routes/purchase"));
 
+app.use('*', function(req, res){
+  res.send('what???', 404);
+});
 
 app.use(errorHandler);
 

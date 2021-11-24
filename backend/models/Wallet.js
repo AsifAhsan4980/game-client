@@ -22,6 +22,23 @@ const ProductsSchema = new mongoose.Schema({
             type: Boolean,
             default: false
         },
+        paymentType: {
+            type: String,
+            required: true,
+        },
+        transactionID: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        mobileNumber: {
+            type: Number,
+            required: true,
+        },
+        amount: {
+            type: Number,
+            required: true,
+        },
     },
     {
         timestamps: true
