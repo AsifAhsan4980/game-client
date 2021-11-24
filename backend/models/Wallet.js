@@ -30,4 +30,4 @@ const ProductsSchema = new mongoose.Schema({
 
 const Wallet= mongoose.model("Wallet", ProductsSchema)
 
-module.exports = Wallet
+module.exports = Wallet;
