@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {ButtonGroup, Card, Col, Form, Row, ToggleButton} from "react-bootstrap";
+import {Button, ButtonGroup, Card, Col, Form, Row, ToggleButton} from "react-bootstrap";
 import {adminProfile} from "../Api/userAdmin";
 import {getAllProducts} from "../Api/products";
 
@@ -45,39 +45,49 @@ const OrderHandle = () => {
                         <Col lg={3} className='text-center'>
                             <h1>Hello {adminData.username} </h1>
                         </Col>
-                        <Col className="text-center" lg={6}>
+                        <Col className="text-center" lg={7}>
                             <Form>
-                                <Form.Label>Order Category</Form.Label>
-                                <Form.Control as="select" aria-label="Default select example" defaultValue="State..." name="type" >
-                                    <option>Select your account type</option>
-                                    {
-                                       product && product.map((data, index) => {
-                                                return (
-                                                    <option key={index}>{data.gameName} {data.categoryName}</option>
+                                <Row>
+                                    <Col lg={10}>
+                                        <Form.Label>Order Category</Form.Label>
+                                        <Form.Control as="select" aria-label="Default select example"
+                                                      defaultValue="State..."
+                                                      name="type">
+                                            {
+                                                product && product.map((data, index) => {
+                                                        return (
+                                                            <option key={index}>{data.gameName} {data.categoryName}</option>
+                                                        )
+                                                    }
                                                 )
                                             }
-                                        )
-                                    }
-                                </Form.Control>
+                                        </Form.Control>
+                                    </Col>
+                                    <Col className="p-3">
+                                        <Button>Add</Button>
+                                    </Col>
+                                </Row>
                             </Form>
-
                         </Col>
-                        <Col><ButtonGroup>
-                            {radios.map((radio, idx) => (
-                                <ToggleButton
-                                    key={idx}
-                                    id={`radio-${idx}`}
-                                    type="radio"
-                                    variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-                                    name="radio"
-                                    value={radio.value}
-                                    checked={radioValue === radio.value}
-                                    onChange={(e) => setRadioValue(e.currentTarget.value)}
-                                >
-                                    {radio.name}
-                                </ToggleButton>
-                            ))}
-                        </ButtonGroup>
+                        <Col>
+                            <div className='text-center'><Form.Label>Active Order Status</Form.Label></div>
+                            <div><ButtonGroup>
+                                {radios.map((radio, idx) => (
+                                    <ToggleButton
+                                        key={idx}
+                                        id={`radio-${idx}`}
+                                        type="radio"
+                                        variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+                                        name="radio"
+                                        value={radio.value}
+                                        checked={radioValue === radio.value}
+                                        onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                    >
+                                        {radio.name}
+                                    </ToggleButton>
+                                ))}
+                            </ButtonGroup></div>
+
                         </Col>
                     </Row>
                 </Card.Body>

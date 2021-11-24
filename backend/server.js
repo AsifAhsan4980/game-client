@@ -7,6 +7,7 @@ const passport=require('passport');
 const cors=require("cors");
 
 
+
 connectDB();
 
 const app = express()
@@ -43,6 +44,7 @@ app.use('/addWallet', require("./routes/addWallet"))
 
 
 app.use("/create/purchase", require("./routes/purchase"));
+
 
 
 app.use(errorHandler);
