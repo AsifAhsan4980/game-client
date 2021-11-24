@@ -150,7 +150,7 @@ const Confirm = () => {
         const data = localStorage.getItem('values')
         setValues(JSON.parse(data))
     },[])
-    console.log('Valuessss',confirmation)
+    
     return (
        
         <>

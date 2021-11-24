@@ -6,7 +6,7 @@ const {protect} = require("../middleware/auth");
 const router = express.Router();
 
 router.route('/').post(protect,createBanner);
-router.route('/').get(protect, findAllBanner);
+router.route('/').get(findAllBanner);
 router.route('/:_id').get(protect, findOneBanner);
 router.route('/:_id').put(protect, updateBanner);
 router.route('/delete/:_id').put(protect, removeBanner);

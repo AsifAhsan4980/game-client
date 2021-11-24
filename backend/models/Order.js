@@ -1,27 +1,23 @@
-const mongoose = require('mongoose');
 
-const ProductsSchema = new mongoose.Schema({
-        userId: {
-            type: String,
-            required: true
-        },
-        walletId: {
-            type: String,
-            required: true
-        },
-        isActive: {
-            type: Boolean,
-            default: true
-        },
-        purchaseId: {
-            type: String,
-        }
+const { Schema, model } = require('mongoose');
+const {Schema} = require("mongoose");
+
+module.exports.WalletCreate = model('WalletCreate', Schema({
+    userId:{
+        type:Schema.Types.ObjectId,
+        ref:'Auth',
+        required:true,
     },
-    {
-        timestamps: true
-    })
+    walletId:{
+        type:Schema.Types.ObjectId,
+        ref:'Wallet',
+        required:true,
+    },
+    purchaseId:{
+        type:Schema.Types.ObjectId,
+        ref:'Purchase',
+        required:true,
+    },
+}, { timestamps: true }));
 
 
-const Order = mongoose.model("Orders", ProductsSchema)
-
-module.exports = Order
