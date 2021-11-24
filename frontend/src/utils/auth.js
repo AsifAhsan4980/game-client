@@ -87,4 +87,4 @@ export const AuthProvider = (props) => {
     );
 };
 
-export { AuthContext};
+export {AuthContext};

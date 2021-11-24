@@ -1,4 +1,4 @@
-const Products = require('../models/Products')
+const Wallet = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
 const _ = require('lodash');
 // const formidable = require('formidable');
@@ -13,23 +13,19 @@ exports.createWallet = (req, res) => {
     }
 
     console.log('Body',req.body)
-    const { userId, images, topUp, details, option, price, region, platform, publisher } = req.body;
+    const { userId, availableBalance, totalOrder, totalSpend, methodName } = req.body;
 
     // new product
-    const productDetails = new Products({
+    const walletDetails = new Wallet({
         userId,
-        images,
-        topUp,
-        price,
-        option,
-        details,
-        region,
-        platform,
-        publisher
+        methodName,
+        availableBalance,
+        totalOrder,
+        totalSpend
     })
 
     // save product in the database
-    productDetails.save()
+    walletDetails.save()
         .then(data => {
             //res.send(data)
             res.status(200).send(data)
@@ -41,35 +37,35 @@ exports.createWallet = (req, res) => {
         });
 }
 
-exports.getWallet = async (req, res) => {
-    const productId = req.params._id;
-    const product = await Products.findById(productId)
-        .select({ images: 1, _id: 0 })
-    res.set('Content-Type', product.images.contentType);
-    return res.status(200).send(product.images.data);
-}
+// exports.getWallet = async (req, res) => {
+//     const productId = req.params._id;
+//     const product = await Products.findById(productId)
+//         .select({ images: 1, _id: 0 })
+//     res.set('Content-Type', product.images.contentType);
+//     return res.status(200).send(product.images.data);
+// }
 
 // retrieve and return all product Item
 exports.findOneWallet = (req, res) => {
-    const productId = req.params._id
-    if (productId) {
-        Products.findById(productId)
+    const walletId = req.params._id
+    if (walletId) {
+        Wallet.findById(walletId)
             .then(data => {
                 if (!data) {
-                    res.status(404).send({ message: "Not found food with id " + productId })
+                    res.status(404).send({ message: "Not found food with id " + walletId })
                 } else {
                     res.send(data)
                 }
             })
             .catch(err => {
-                res.status(500).send({ message: "Error retrieving user with id " + productId })
+                res.status(500).send({ message: "Error retrieving user with id " + walletId })
             })
     }
 }
 // retrieve and return a single product item
 exports.findAllWallet = (req, res) => {
 
-    Products.find()
+    Wallet.find()
         .then(menu => {
             res.send(menu)
         }).catch(err => {
@@ -86,7 +82,7 @@ exports.updateWallet = (req, res) => {
     }
 
     const id = req.params._id;
-    Products.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    Wallet.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
@@ -104,7 +100,7 @@ exports.removeWallet = (req, res) => {
     const productId = req.params._id
 
     //Products.findByIdAndDelete(productId)
-    Products.updateOne({ _id: productId }, { disabled: true })
+    Wallet.updateOne({ _id: productId }, { disabled: true })
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: `Cannot Delete with id ${productId}. Maybe id is wrong` })
