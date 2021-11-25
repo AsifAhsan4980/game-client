@@ -158,7 +158,7 @@ const Login = () => {
 const showSuccess = () =>
     {
         if (success) return (
-            <Redirect to='/admin'/>
+            <Redirect to='/'/>
         )
     }
 

@@ -1,8 +1,7 @@
 
 const { Schema, model } = require('mongoose');
-const {Schema} = require("mongoose");
 
-module.exports.WalletCreate = model('WalletCreate', Schema({
+module.exports.Order = model('Order', Schema({
     userId:{
         type:Schema.Types.ObjectId,
         ref:'Auth',

@@ -24,7 +24,7 @@ const GameCart = () => {
                 {product.map((product, index) => {
                     return (
                         <Col key={product._id} sm={6} md={4} lg={2} xl={2} className="mb-4 text-decoration-none">
-                            <Link to={`category/${index}/${product.gameName}`}><GameList data={product}/></Link>
+                            <Link to={`category/${index}/${product.gameName}/${product._id}`}><GameList data={product}/></Link>
                         </Col>
                     );
                 })}
