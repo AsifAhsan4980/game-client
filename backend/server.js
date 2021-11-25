@@ -7,6 +7,7 @@ const passport=require('passport');
 const cors=require("cors");
 
 
+
 connectDB();
 
 const app = express()
@@ -46,7 +47,6 @@ app.use("/purchase", require("./routes/purchase"));
 app.use('*', function(req, res){
   res.send('what???', 404);
 });
-
 
 app.use(errorHandler);
 

@@ -1,12 +1,31 @@
 const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
+
 const upload = require('../middleware/multer');
+
+
+const multer = require('multer')
+const upload = multer({dest : 'upload'})
+
+
 const _ = require('lodash');
 
-
+const storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, '/src/my-images');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname);
+    }
+});
 
 //create new product Item
+
 exports.create = async(req, res) => {
+
+exports.create = upload.single('productImage') ,(req, res) => {
+    console.log(req.file)
+
     // validate request
     if (!req.body) {
         res.status(400).send({ message: "Content can not be emtpy!" });

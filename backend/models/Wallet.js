@@ -1,17 +1,50 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-module.exports.Wallet = model('Wallet', Schema({
-    totalAmount:{
-        type: Number,
+const ProductsSchema = new mongoose.Schema({
+        userId: {
+            type: String,
+            required: true
+        },
+        methodName : {
+            type: String,
+            required: true
+        },
+        availableBalance :  {
+            type: Number,
+        },
+        totalOrder : {
+            type: Number,
+        },
+        totalSpend : {
+            type: Number
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+        paymentType: {
+            type: String,
+            required: true,
+        },
+        transactionID: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        mobileNumber: {
+            type: Number,
+            required: true,
+        },
+        amount: {
+            type: Number,
+            required: true,
+        },
     },
-    spentAmount:{
-        type: Number,
-    },
-    currentAmount:{
-        type: Number,
-    },
-    totalOrder:{
-        type: Number,
-    },
-}, { timestamps: true }));
+    {
+        timestamps: true
+    })
 
+
+const Wallet= mongoose.model("Wallet", ProductsSchema)
+
+module.exports = Wallet
