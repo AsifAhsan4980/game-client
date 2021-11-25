@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, Redirect } from "react-router-dom";
 import { Badge, Card, Col, Form, Row, Fl } from "react-bootstrap";
 import { getProducts } from "../../../../Api";
 import "./gameinfo.css"
 import styled from 'styled-components';
 import Confirmation from '../../../../components/Main/Confirmation/Confirm';
+import { isAuthenticated } from '../../../../utils/auth';
 
 const Button = styled.button`
   background-color: #001651;
@@ -55,7 +56,7 @@ const GameInfo = () => {
         number: '',
         password: '',
         backupCode: '',
-        recharge: '',
+        recharge: {},
     });
 
     const { type, number, password, backupCode, recharge } = values;
@@ -80,10 +81,12 @@ const GameInfo = () => {
         console.log(accountSelect)
     }
 
-    function func2(id) {
+    function func2(option, price) {
         setValues({
             ...values,
-            recharge: id,
+            recharge: {
+                [option]: price
+            },
         })
     }
 
@@ -108,7 +111,12 @@ const GameInfo = () => {
     }
 
     const handleSubmit = (e) => {
-        localStorage.setItem('values', JSON.stringify(values))
+        if (!isAuthenticated()) {
+            window.location = "http://localhost:3000/login";
+        }
+
+        console.log('Values', values)
+        //localStorage.setItem('values', JSON.stringify(values))
     }
 
     return (
@@ -158,7 +166,7 @@ const GameInfo = () => {
                                     <Col key={index} sm={5} md={6} lg={4} xl={2}>
                                         <ButtonToggle key={product._id}
                                             active={active === product._id}
-                                            onClick={function (event) { setActive(product._id); func2(product._id) }}
+                                            onClick={function (event) { setActive(product._id); func2(product.option, product.price) }}
                                             variant="outline-primary">{product.option} <Badge
                                                 bg="primary">{product.price}</Badge></ButtonToggle>
                                     </Col>
@@ -179,9 +187,9 @@ const GameInfo = () => {
                         </div>
                     </Card.Body>
                 </Card>
-                <Link as={Link} to="/confirmation" className='d-flex justify-content-lg-end'>
+                <div className='d-flex justify-content-lg-end'>
                     <Button data={values} className="d-flex justify-content-center" onClick={handleSubmit}>Submit</Button>
-                </Link>
+                </div>
             </div>
         </>
     )

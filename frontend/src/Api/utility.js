@@ -22,11 +22,6 @@ export const addBanners = (token,addBanner) => {
     })
 }
 
-export const findAllBanner = (token) => {
-    return axios.get("http://localhost:3001/admin/banner",{
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    })
+export const findAllBanner = () => {
+    return axios.get("http://localhost:3001/admin/banner")
 }

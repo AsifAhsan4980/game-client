@@ -6,7 +6,7 @@ import {
     AiOutlineShareAlt,
 } from "react-icons/ai";
 import {Card, Row, Col, Button} from "react-bootstrap";
-
+import {API} from '../../../../utils/config';
 
 const GameList = ({data}) => {
     return (
@@ -14,7 +14,7 @@ const GameList = ({data}) => {
             <Card.Img
                 variant="top"
                 className="cart_image"
-                src={data.images}
+                src={`${API}/${data.images}`}
             />
             <Card.Body>
                 <Card.Title className="text-dark bg-white text-center">
