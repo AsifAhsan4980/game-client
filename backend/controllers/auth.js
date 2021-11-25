@@ -5,7 +5,7 @@ const ErrorResponse = require("../utils/errorResponse")
 
 // @desc    Register user
 exports.register = async (req, res, next) => {
-    const {username, email,phonenumber, password} = req.body;
+    const {username, email,phonenumber, password, walletId} = req.body;
 
 
     try {
@@ -14,6 +14,7 @@ exports.register = async (req, res, next) => {
             email,
             phonenumber,
             password,
+            walletId
         });
 
         sendToken(user, 200, res);

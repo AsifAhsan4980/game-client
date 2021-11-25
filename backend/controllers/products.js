@@ -23,13 +23,14 @@ exports.create = async(req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-    
+
 }
 
 exports.addProductImage = (req, res) => {
     upload(req, res, function (err) {
         const { gameName, categoryName } = req.body;
-        
+
+
         const product = new Products({
             gameName,
             categoryName,
@@ -56,7 +57,7 @@ exports.addProductImage = (req, res) => {
             res.status(400).send({ message: "Content can not be emtpy!" });
             return;
         }
-        
+
         const { gameName, categoryName, topUp, details, option, price, region, platform, publisher } = req.body;
         console.log('req.body', req.body)
         console.log('req.file', req.file)
@@ -117,8 +118,8 @@ exports.findAll = (req, res) => {
         .then(menu => {
             res.send(menu)
         }).catch(err => {
-            res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
-        })
+        res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
+    })
 }
 
 // Update a food item by product id

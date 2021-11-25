@@ -5,10 +5,10 @@ const ProductsSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        methodName : {
-            type: String,
-            required: true
-        },
+        // methodName : {
+        //     type: String,
+        //     required: true
+        // },
         availableBalance :  {
             type: Number,
         },
@@ -22,6 +22,7 @@ const ProductsSchema = new mongoose.Schema({
             type: Boolean,
             default: false
         },
+
         paymentType: {
             type: String,
             required: true,
@@ -39,6 +40,7 @@ const ProductsSchema = new mongoose.Schema({
             type: Number,
             required: true,
         },
+
     },
     {
         timestamps: true
