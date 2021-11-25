@@ -11,7 +11,7 @@ module.exports.Purchase = model('Purchase', Schema({
         ref:'Products',
         required:true,
     },
-    accountTye:{
+    accountType:{
         type: String,
         required: true,
     },

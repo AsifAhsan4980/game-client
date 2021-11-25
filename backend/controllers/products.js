@@ -2,9 +2,7 @@ const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
 const upload = require('../middleware/multer');
 const _ = require('lodash');
-​
-​
-​
+
 //create new product Item
 exports.create = async(req, res) => {
     // validate request
@@ -27,7 +25,7 @@ exports.create = async(req, res) => {
     }
     
 }
-​
+
 exports.addProductImage = (req, res) => {
     upload(req, res, function (err) {
         const { gameName, categoryName } = req.body;
@@ -49,7 +47,7 @@ exports.addProductImage = (req, res) => {
             });
     })
 }
-​
+
 /*exports.create = (req, res) => {
     console.log('req.body', req.body)
     upload(req, res, function (err) {
@@ -86,7 +84,7 @@ exports.addProductImage = (req, res) => {
             });
     })
 }*/
-​
+
 exports.getImage = async (req, res) => {
     const productId = req.params._id;
     const product = await Products.findById(productId)
@@ -94,7 +92,7 @@ exports.getImage = async (req, res) => {
     res.set('Content-Type', product.images.contentType);
     return res.status(200).send(product.images.data);
 }
-​
+
 // retrieve and return all product Item
 exports.findOne = (req, res) => {
     const productId = req.params._id
@@ -114,7 +112,7 @@ exports.findOne = (req, res) => {
 }
 // retrieve and return a single product item
 exports.findAll = (req, res) => {
-​
+
     Products.find()
         .then(menu => {
             res.send(menu)
@@ -122,7 +120,7 @@ exports.findAll = (req, res) => {
             res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
         })
 }
-​
+
 // Update a food item by product id
 exports.update = (req, res) => {
     if (!req.body) {
@@ -130,7 +128,7 @@ exports.update = (req, res) => {
             .status(400)
             .send({ message: "Data to update can not be empty" })
     }
-​
+
     const id = req.params._id;
     Products.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
@@ -144,11 +142,11 @@ exports.update = (req, res) => {
             res.status(500).send({ message: "Error Update user information" })
         })
 }
-​
+
 // Delete a food with specified product id in the request
 exports.remove = (req, res) => {
     const productId = req.params._id
-​
+
     //Products.findByIdAndDelete(productId)
     Products.updateOne({ _id: productId }, { disabled: true })
         .then(data => {
