@@ -177,3 +177,10 @@ exports.updateUserRole = async (req, res) => {
     await User.updateOne({ _id: _id }, { role: role });
     return res.status(200).send("Role updated!!");
 }
+
+exports.updateUserWallet = async (req, res) => {
+    const _id = req.params.id;
+    const { wallet } = req.body;
+    await User.updateOne({ _id: _id }, { wallet: wallet });
+    return res.status(200).send("wallet updated!!");
+}

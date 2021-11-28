@@ -11,7 +11,7 @@ module.exports.createNewPurchase = async (req, res) => {
     console.log(req.user._id)
     const result = await purchase.save();
     return res.status(201).send({
-        purchase: _.pick(result, ['userId','productId', 'accountType', 'Number', 'Password', 'backupCode', 'product','isComplete'])
+        purchase: _.pick(result, ['_id','userId','productId', 'accountType', 'Number', 'Password', 'backupCode', 'product','isComplete'])
     })
 }
 
