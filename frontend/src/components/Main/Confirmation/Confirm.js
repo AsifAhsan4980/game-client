@@ -5,28 +5,32 @@ import Img2 from "../../../assets/img/payment/selften-1634563895624.jpg"
 import Img3 from "../../../assets/img/payment/selften-1634563918489.jpg"
 import Img4 from "../../../assets/img/payment/selften-1634563933493.jpg"
 import styled from "styled-components";
+import { addWallet } from '../../../Api/addWallet';
+import { userInfo } from '../../../utils/auth';
+import { getOneUser } from '../../../Api/user';
+import { createNewPurchase } from '../../../Api/purchase';
 
 const paymentMethod = [
 
     {
         "id": 1,
-        "methodName": "Bkash",
+        "paymentType": "Bkash",
         "photos": Img1,
         "number": "01234567890",
     },
     {
         "id": 2,
-        "methodName": "Nogod",
+        "paymentType": "Nogod",
         "photos": Img2
     },
     {
         "id": 3,
-        "methodName": "Rocket",
+        "paymentType": "Rocket",
         "photos": Img3
     },
     {
         "id": 4,
-        "methodName": "Upay",
+        "paymentType": "Upay",
         "photos": Img4
     }
 ]
@@ -116,17 +120,36 @@ const ButtonToggle = styled(Button)`
 
 
 const Confirm = () => {
-    
+
+    const [user, setUser] = useState({})
+
     const [values, setValues] = useState({
-        type: '',
-        number: '',
-        password: '',
-        backupCode: '',
-        recharge: '',
+        walletId: '',
+        paymentType: '',
+        transactionID: '',
+        mobileNumber: '',
+        amount: '',
     });
 
+    const { paymentType, transactionID, mobileNumber, amount } = values;
+
+
+    useEffect(() => {
+        getOneUser(token, id)
+            .then(response => setUser(response.data))
+            .catch((err) => {
+                console.log(err.response);
+            });
+    }, [values]);
+
+
+    useEffect(() => {
+        const data = localStorage.getItem('values')
+        console.log(data)
+    }, []);
+
     const [confirmation, setConfirmation] = useState({
-        
+
     });
 
     const [active, setActive] = useState({
@@ -137,6 +160,15 @@ const Confirm = () => {
     })
 
     const { methodName } = payMethod
+    const { token, id } = userInfo();
+
+    function func2(paymentType) {
+        setValues({
+            ...values,
+            paymentType: paymentType
+        })
+    }
+
     function handleClick(e) {
         setActive({
             ...payMethod,
@@ -146,13 +178,34 @@ const Confirm = () => {
         console.log(payMethod)
     }
 
-    useEffect(() => {
-        const data = localStorage.getItem('values')
-        setValues(JSON.parse(data))
-    },[])
-    
+    const handleChange = (e) => {
+        setValues({
+            ...values,
+            walletId: user.wallet,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('values', values)
+        addWallet(token, values)
+            .then(response => {
+                const data = JSON.parse(localStorage.getItem('values'))
+                console.log('amount', values.amount)
+                if (data) {
+                    let amount = 0
+                    for (let x in data.product) {
+                        amount = data.product[x]
+                    }
+                    if (values.amount >= amount) {
+                        createNewPurchase(token, data)
+                    }
+                }
+            })
+    }
+
     return (
-       
         <>
             <Container>
                 <div className="d-flex justify-content-center">
@@ -162,8 +215,9 @@ const Confirm = () => {
                                 <ButtonToggle
                                     active={active === data.id}
                                     onClick={() => setActive(data.id)}
-                                    variant="outline-primary" name="methodName" value={methodName}><img src={data.photos} alt={data.methodName} /> <div
-                                        bg="primary" name="methodName" value={methodName} >{data.methodName}</div></ButtonToggle>
+                                    onClick={function (event) { setActive(data.id); func2(data.paymentType) }}
+                                    variant="outline-primary" name="paymentType" value={paymentType}><img src={data.photos} alt={data.paymentType} /> <div
+                                        bg="primary" name="paymentType" value={paymentType} >{data.paymentType}</div></ButtonToggle>
                             </Fragment>
                         )
                     })}
@@ -183,19 +237,19 @@ const Confirm = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Amount</Form.Label>
-                            <Form.Control type="amount" placeholder="Enter Amount" />
+                            <Form.Control type="amount" name="amount" value={amount} placeholder="Enter Amount" onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Sender Number</Form.Label>
-                            <Form.Control type="seders_number" placeholder="Sender Number" />
+                            <Form.Control type="seders_number" name="mobileNumber" value={mobileNumber} placeholder="Sender Number" onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Transaction Number</Form.Label>
-                            <Form.Control type="transactionNumber" placeholder="Transaction Number" />
+                            <Form.Control type="transactionNumber" name="transactionID" value={transactionID} placeholder="Transaction Number" onChange={handleChange} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" onClick={handleSubmit}>
                             Submit
                         </Button>
                     </Form>

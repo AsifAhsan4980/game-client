@@ -4,6 +4,8 @@ const Products = require("../models/Products");
 const upload = require('../middleware/multer');
 
 
+//create new product Item
+
 module.exports.createBanner = async (req, res) => {
     upload(req, res, function (err) {
         

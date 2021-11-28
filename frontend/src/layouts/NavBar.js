@@ -9,8 +9,6 @@ const NavBar = () => {
         <>
             <div className="hide"><TopNav/></div>
 
-
-
         </>
     )
 }

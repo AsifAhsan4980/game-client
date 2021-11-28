@@ -128,7 +128,7 @@ const TopNav = () => {
                                                     <Dropdown.Item eventKey="1"><Link to='profile'>My Profile</Link></Dropdown.Item>
                                                     <Dropdown.Item eventKey="2"><Link to='userWallet'>  My Wallet</Link></Dropdown.Item>
 
-                                                    <Dropdown.Item eventKey="3"><Link to='userWallet'>Add Wallet</Link></Dropdown.Item>
+                                                    <Dropdown.Item eventKey="3"><Link to='/confirmation'>Add Wallet</Link></Dropdown.Item>
                                                     <Dropdown.Item eventKey="4"><Link to='myOrder'>My Order</Link> </Dropdown.Item>
                                                     <Dropdown.Item eventKey="5">Support</Dropdown.Item>
                                                     <Dropdown.Item eventKey="6">Logout</Dropdown.Item>
