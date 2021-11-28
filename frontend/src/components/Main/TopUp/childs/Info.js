@@ -6,6 +6,8 @@ import "./gameinfo.css"
 import styled from 'styled-components';
 import Confirmation from '../../../../components/Main/Confirmation/Confirm';
 import { isAuthenticated } from '../../../../utils/auth';
+import { createNewPurchase } from '../../../../Api/purchase';
+import { userInfo } from '../../../../utils/auth';
 
 const Button = styled.button`
   background-color: #001651;
@@ -48,29 +50,31 @@ const account = [
 ]
 
 
-
-
-const GameInfo = () => {
-    const [values, setValues] = useState({
-        type: '',
-        number: '',
-        password: '',
-        backupCode: '',
-        recharge: {},
-    });
-
-    const { type, number, password, backupCode, recharge } = values;
-
-
+const GameInfo = (props) => {
     const [accountSelect, setAccountType] = useState({
         accountType: ''
     }
     )
+    
     const [topUp, setTopUP] = useState([])
+    const [id, setId] = useState('')
     const [active, setActive] = useState(topUp[0]);
     const idData = useParams()
     const sid = idData.id
-    const { accountType } = account
+    const productId=idData.productId
+    const { accountName } = account
+    const {token} = userInfo();
+
+    const [values, setValues] = useState({
+        productId:productId,
+        accountType: '',
+        Number: '',
+        Password: '',
+        backupCode: '',
+        product: {},
+    });
+
+    const { accountType, Number, Password, backupCode, product } = values;
 
     function handleOption(e) {
         setAccountType({
@@ -84,7 +88,7 @@ const GameInfo = () => {
     function func2(option, price) {
         setValues({
             ...values,
-            recharge: {
+            product: {
                 [option]: price
             },
         })
@@ -117,8 +121,9 @@ const GameInfo = () => {
 
         console.log('Values', values)
         //localStorage.setItem('values', JSON.stringify(values))
+        createNewPurchase(token,values)
     }
-
+    console.log('ID',id)
     return (
         <>
             <div as={Form}>
@@ -129,7 +134,7 @@ const GameInfo = () => {
 
                                 <Form.Label>Account Type</Form.Label>
                                 <Form.Control as="select" aria-label="Default select example" defaultValue="State..."
-                                    value={type} name="type" onChange={handleChange}>
+                                    value={accountType} name="accountType" onChange={handleChange}>
                                     <option>Select your account type</option>
                                     {
                                         account.map((data, index) => {
@@ -143,12 +148,12 @@ const GameInfo = () => {
 
                             </Col>
                             <Col>
-                                <Form.Label>{accountSelect.accountType} Number</Form.Label>
-                                <Form.Control placeholder="Last name" name="number" value={number} onChange={handleChange} />
+                                <Form.Label>{accountSelect.accountName} Number</Form.Label>
+                                <Form.Control placeholder="Last name" name="Number" value={Number} onChange={handleChange} />
                             </Col>
                             <Col>
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control placeholder="Last name" name="password" value={password} onChange={handleChange} />
+                                <Form.Control placeholder="Last name" name="Password" value={Password} onChange={handleChange} />
                             </Col>
                         </Row>
 

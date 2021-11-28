@@ -1,4 +1,4 @@
-const Wallet = require('../models/Products')
+const Wallet = require('../models/Wallet')
 const ErrorResponse = require("../utils/errorResponse")
 const _ = require('lodash');
 // const formidable = require('formidable');
@@ -12,8 +12,8 @@ exports.createWallet = (req, res) => {
         return;
     }
 
-    console.log('Body',req.body)
-    const { userId, availableBalance, totalOrder, totalSpend, methodName } = req.body;
+    console.log('Body', req.body)
+    const { userId, methodName, availableBalance, totalOrder, totalSpend, paymentType, transactionID, mobileNumber, amount } = req.body;
 
     // new product
     const walletDetails = new Wallet({
@@ -21,7 +21,11 @@ exports.createWallet = (req, res) => {
         methodName,
         availableBalance,
         totalOrder,
-        totalSpend
+        totalSpend,
+        paymentType,
+        transactionID,
+        mobileNumber,
+        amount
     })
 
     // save product in the database
@@ -69,8 +73,8 @@ exports.findAllWallet = (req, res) => {
         .then(menu => {
             res.send(menu)
         }).catch(err => {
-        res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
-    })
+            res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
+        })
 }
 
 // Update a food item by product id
