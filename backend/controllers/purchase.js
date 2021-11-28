@@ -6,6 +6,7 @@ module.exports.createNewPurchase = async (req, res) => {
         res.status(400).send({message: "Content can not be emtpy!"});
         return;
     }
+
     const purchase = new Purchase(_.pick(req.body, ['productId', 'accountType', 'Number', 'Password', 'backupCode', 'product','isComplete']));
     purchase.userId=req.user._id;
     console.log(req.user._id)

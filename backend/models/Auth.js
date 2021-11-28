@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    wallet: {
+    wallet:{
         type: Schema.Types.ObjectId,
         ref: "Wallet",
         default: null
@@ -58,6 +58,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
+    },
+    walletId: {
+        type: String
     },
     disabled: {
         type: Boolean,

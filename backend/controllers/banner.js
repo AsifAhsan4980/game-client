@@ -60,6 +60,7 @@ exports.findAllBanner = (req, res) => {
     Banners.find()
         .then(menu => {
             res.send(menu)
+            console.log(menu)
         }).catch(err => {
             res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
         })

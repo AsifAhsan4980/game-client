@@ -1,3 +1,4 @@
+
 const { Schema, model } = require('mongoose');
 
 module.exports.Order = model('Order', Schema({
@@ -17,4 +18,5 @@ module.exports.Order = model('Order', Schema({
         required:true,
     },
 }, { timestamps: true }));
+
 
