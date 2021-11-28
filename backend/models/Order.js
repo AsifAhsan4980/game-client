@@ -1,6 +1,4 @@
-
 const { Schema, model } = require('mongoose');
-const {Schema} = require("mongoose");
 
 module.exports.WalletCreate = model('WalletCreate', Schema({
     userId:{
@@ -19,5 +17,4 @@ module.exports.WalletCreate = model('WalletCreate', Schema({
         required:true,
     },
 }, { timestamps: true }));
-
 
