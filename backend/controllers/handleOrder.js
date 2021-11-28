@@ -1,13 +1,16 @@
 const ErrorResponse = require("../utils/errorResponse")
 const User = require("../models/Auth");
-const Order = require("../models/Order");
+const {Order} = require("../models/Order");
 const Products = require("../models/Products");
-const queue = require('./')
+const orderQueue = require('./')
+const adminQueue = require('./')
 const Wallet = require("../models/Wallet");
 const {Purchase} = require("../models/Purchase");
 
 exports.getOneOrder = async (req, res, next) => {
-    const value = queue.shift();
+    const value = orderQueue.shift();
+    const assignedAdmin = adminQueue.shift()
+    const orderId = value.orderId
     const userId = value.userId
     const walletId = value.walletId
     const purchaseId = value.purchaseId
@@ -15,6 +18,7 @@ exports.getOneOrder = async (req, res, next) => {
     let userData
     let walletData
     let purchaseData
+    let orderData
 
     //get user data
     if (userId) {
@@ -60,6 +64,20 @@ exports.getOneOrder = async (req, res, next) => {
                 res.status(500).send({message: "Error retrieving user with id " + purchaseId})
             })
     }
+
+    if (orderId) {
+        Order.findById(orderId)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({message: "Not found food with id " + orderId})
+                } else {
+                    orderData = data
+                }
+            })
+            .catch(err => {
+                res.status(500).send({message: "Error retrieving user with id " + orderId})
+            })
+    }
     const productId = purchaseData.productId
 
     const adminProductId= req.param.id
@@ -67,7 +85,7 @@ exports.getOneOrder = async (req, res, next) => {
     if (adminProductId ){
         for(let i = 0; i<adminProductId.length; i++){
             if( adminProductId[i] === productId){
-                
+                res.status(200).send()
             }
         }
     }
