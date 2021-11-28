@@ -39,6 +39,7 @@ app.use("/auth/google",require("./routes/authGoogleRouter"));
 app.use("/auth/facebook",require("./routes/authFacebookRouter"));
 app.use("/admin/banner", require("./routes/banner"));
 app.use("/count", require("./routes/visitors"));
+<<<<<<< Updated upstream
 
 // app.use("/create/purchase", require("./routes/purchase"));
 app.use('/addWallet', require("./routes/addWallet"))
@@ -47,6 +48,13 @@ app.use("/purchase", require("./routes/purchase"));
 app.use('*', function(req, res){
   res.send('what???', 404);
 });
+=======
+app.use("/admin/purchase", require("./routes/purchase"));
+app.use("/admin/wallet", require("./routes/addWallet"));
+app.use("/admin/order", require("./routes/order"));
+app.use("/admin/amount", require("./routes/amount"));
+// app.use(/findOrder/, require("./routes/manageOrder"));
+>>>>>>> Stashed changes
 
 app.use(errorHandler);
 
