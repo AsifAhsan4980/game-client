@@ -2,6 +2,7 @@ const _ = require('lodash');
 const {Order} = require('../models/Order');
 
 module.exports.createNewOrder = async (req, res) => {
+    console.log('New Order')
     if (!req.body) {
         res.status(400).send({message: "Content can not be emtpy!"});
         return;

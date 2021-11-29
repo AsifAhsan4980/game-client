@@ -9,6 +9,9 @@ import { addWallet } from '../../../Api/addWallet';
 import { userInfo } from '../../../utils/auth';
 import { getOneUser } from '../../../Api/user';
 import { createNewPurchase } from '../../../Api/purchase';
+
+import { notify } from '../../../utils/notification'
+
 import { createNewOrder } from '../../../Api/order';
 
 const paymentMethod = [
@@ -136,6 +139,7 @@ const Confirm = () => {
 
 
     useEffect(() => {
+        //notify('Purchse Created')
         getOneUser(token, id)
             .then(response => setUser(response.data))
             .catch((err) => {
@@ -201,15 +205,21 @@ const Confirm = () => {
                     }
                     if (values.amount >= amount) {
                         createNewPurchase(token, data)
-                        .then(response=>{
-                            const allId={
-                                userId:id,
-                                walletId:values.walletId,
-                                purchaseId:response.data.purchase._id
-                            }
-                            createNewOrder(token,allId)
-                            .then(response=>console.log('Order Created'))
-                        })
+
+                            .then(response => {
+                                const data = {
+                                    userId: id,
+                                    purchaseId: response.data.purchase._id,
+                                    walletId: values.walletId
+                                }
+                                createNewOrder(token, data)
+                                    .then(response => notify('Purchse Created'))
+                                    .catch(err => notify('Something Failed! Please try again'))
+
+                            })
+                            .catch(err => notify('Something Failed! Please try again'))
+          
+
                     }
                 }
             })
