@@ -9,6 +9,7 @@ import { addWallet } from '../../../Api/addWallet';
 import { userInfo } from '../../../utils/auth';
 import { getOneUser } from '../../../Api/user';
 import { createNewPurchase } from '../../../Api/purchase';
+import { createNewOrder } from '../../../Api/order';
 
 const paymentMethod = [
 
@@ -200,6 +201,15 @@ const Confirm = () => {
                     }
                     if (values.amount >= amount) {
                         createNewPurchase(token, data)
+                        .then(response=>{
+                            const allId={
+                                userId:id,
+                                walletId:values.walletId,
+                                purchaseId:response.data.purchase._id
+                            }
+                            createNewOrder(token,allId)
+                            .then(response=>console.log('Order Created'))
+                        })
                     }
                 }
             })
