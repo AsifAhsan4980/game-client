@@ -1,63 +1,92 @@
 const ErrorResponse = require("../utils/errorResponse")
 const User = require("../models/Auth");
-const Order = require("../models/Order");
+const {Order} = require("../models/Order");
 const Products = require("../models/Products");
+const orderQueue = require('./')
+const adminQueue = require('./')
+const Wallet = require("../models/Wallet");
+const {Purchase} = require("../models/Purchase");
 
-exports.handleOrder = async (req, res, next) => {
-    try{
-        const {
-            userId,
-            purchaseId
-        } = req.body
+exports.getOneOrder = async (req, res, next) => {
+    const value = orderQueue.shift();
+    const assignedAdmin = adminQueue.shift()
+    const orderId = value.orderId
+    const userId = value.userId
+    const walletId = value.walletId
+    const purchaseId = value.purchaseId
 
-            if (userId) {
-                User.findById(userId)
-                    .then(async data => {
-                        if (!data) {
-                            res.status(404).send({message: "Not found food with id " + id})
-                        } else {
-                            try {
-                               const walletIds = data.walletId
+    let userData
+    let walletData
+    let purchaseData
+    let orderData
 
-                                const order = await Order.create({
-                                    userId,
-                                    walletIds,
-                                    purchaseId
-                                });
-                                await order.save()
-                            } catch (err) {
-                                next(err);
-                            }
-                        }
-                    })
-                    .catch(err => {
-                        return new ErrorResponse("Error retrieving user with id " + userId, err)
+    //get user data
+    if (userId) {
+        User.findById(userId)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({message: "Not found food with id " + userId})
+                } else {
+                    userData = data
+                }
+            })
+            .catch(err => {
+                res.status(500).send({message: "Error retrieving user with id " + userId})
+            })
+    }
 
-                    })
+    //get wallet data
+    if (walletId) {
+        Wallet.findById(walletId)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({message: "Not found food with id " + walletId})
+                } else {
+                    walletData = data
+                }
+            })
+            .catch(err => {
+                res.status(500).send({message: "Error retrieving user with id " + walletId})
+            })
+    }
+
+    //get wallet data
+    if (purchaseId) {
+        Purchase.findById(purchaseId)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({message: "Not found food with id " + purchaseId})
+                } else {
+                    purchaseData = data
+                }
+            })
+            .catch(err => {
+                res.status(500).send({message: "Error retrieving user with id " + purchaseId})
+            })
+    }
+
+    if (orderId) {
+        Order.findById(orderId)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({message: "Not found food with id " + orderId})
+                } else {
+                    orderData = data
+                }
+            })
+            .catch(err => {
+                res.status(500).send({message: "Error retrieving user with id " + orderId})
+            })
+    }
+    const productId = purchaseData.productId
+
+    const adminProductId= req.param.id
+
+    if (adminProductId ){
+        for(let i = 0; i<adminProductId.length; i++){
+            if( adminProductId[i] === productId){
+                res.status(200).send()
             }
+        }
     }
-    catch(err) {
-        return new ErrorResponse("something went wrong")
-    }
-}
-
-exports.updateOrder = (req, res) => {
-    if (!req.body) {
-        return res
-            .status(400)
-            .send({ message: "Data to update can not be empty" })
-    }
-
-    const id = req.params._id;
-    Products.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-        .then(data => {
-            if (!data) {
-                res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
-            } else {
-                res.send(data)
-            }
-        })
-        .catch(err => {
-            res.status(500).send({ message: "Error Update user information" })
-        })
 }

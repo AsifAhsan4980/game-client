@@ -7,7 +7,6 @@ const ErrorResponse = require("../utils/errorResponse")
 exports.register = async (req, res, next) => {
     const {username, email,phonenumber, password, walletId} = req.body;
 
-
     try {
         const user = await User.create({
             username,
@@ -25,7 +24,7 @@ exports.register = async (req, res, next) => {
 
 // @desc    Login user
 exports.login = async (req, res, next) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     // Check if email and password is provided
     if (!email || !password) {
@@ -34,7 +33,7 @@ exports.login = async (req, res, next) => {
 
     try {
         // Check that user exists by email
-        const user = await User.findOne({email}).select("+password");
+        const user = await User.findOne({ email }).select("+password");
 
         if (!user) {
             return next(new ErrorResponse("Invalid credentials", 401));
@@ -43,10 +42,12 @@ exports.login = async (req, res, next) => {
         // Check that password match
         const isMatch = await user.matchPasswords(password);
 
+        if (user.disabled===true) {
+            return next(new ErrorResponse("User does not exist!", 401));
+        }
         if (!isMatch) {
             return next(new ErrorResponse("Invalid credentials", 401));
         }
-
 
         sendToken(user, 200, res);
         saveInfo(user, 200, res);
@@ -57,13 +58,13 @@ exports.login = async (req, res, next) => {
 
 
 exports.forgotpassword = async (req, res, next) => {
-    const {email} = req.body
+    const { email } = req.body
 
     if (!email) {
         return next(new ErrorResponse("Please provide an email", 400));
 
         try {
-            const user = await User.findOne({email});
+            const user = await User.findOne({ email });
 
             if (!user) {
                 return next(new ErrorResponse("No email could not be sent", 404));
@@ -83,26 +84,26 @@ exports.resetpassword = (req, res, next) => {
 
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
-    const {password, ...info} = user._doc;
+    const { password, ...info } = user._doc;
 
 
     res.cookie('jwt', token, {
         expires: new Date(Date.now() + process.env.JWT_TOKEN),
         // secure:true,
         httpOnly: true,
-    }).status(statusCode).json({success: true, ...info, token});
+    }).status(statusCode).json({ success: true, ...info, token });
 };
 
 exports.sendTokenOauth = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
-    const {password, ...info} = user._doc;
+    const { password, ...info } = user._doc;
 
 
     res.cookie('jwt', token, {
         expires: new Date(Date.now() + process.env.JWT_TOKEN),
         // secure:true,
         httpOnly: true,
-    }).status(statusCode).json({success: true, ...info, token});
+    }).status(statusCode).json({ success: true, ...info, token });
 };
 
 const saveInfo = async (user, statusCode, res) => {

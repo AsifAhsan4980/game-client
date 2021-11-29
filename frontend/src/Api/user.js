@@ -21,9 +21,9 @@ export const getOneUser = (token,id) => {
 }
 
 export const deleteUser = (token,id) => {
-    return axios.delete(`http://localhost:3001/admin/user/${id}`,{
-        headers:{
-            "Content-Type":"application/json",
+    return axios.put(`http://localhost:3001/admin/user/delete/${id}`, {
+        headers: {
+            "Content-Type": "application/json",
             "Authorization":`Bearer ${token}`
         }
     })

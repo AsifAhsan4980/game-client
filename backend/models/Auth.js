@@ -59,9 +59,6 @@ const UserSchema = new mongoose.Schema({
         enum: ['admin', 'user'],
         default: 'user'
     },
-    walletId: {
-        type: String
-    },
     disabled: {
         type: Boolean,
         default: false

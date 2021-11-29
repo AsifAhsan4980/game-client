@@ -10,6 +10,9 @@ exports.create = async(req, res) => {
         res.status(400).send({ message: "Content can not be emtpy!" });
         return;
     }
+    console.log()
+    const { gameName, categoryName, images, topUp, details, option, price, region, platform, publisher } = req.body;
+
     // new product
     try {
         const updatedProduct = await Products.findByIdAndUpdate(
@@ -113,7 +116,6 @@ exports.findOne = (req, res) => {
 }
 // retrieve and return a single product item
 exports.findAll = (req, res) => {
-
     Products.find()
         .then(menu => {
             res.send(menu)
@@ -147,6 +149,17 @@ exports.update = (req, res) => {
 // Delete a food with specified product id in the request
 exports.remove = (req, res) => {
     const productId = req.params._id
+    Products.updateOne({ _id: productId }, { disabled: true })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
+            } else {
+                res.send(data)
+            }
+        })
+        .catch(err => {
+            res.status(500).send({ message: "Error Update user information" })
+        })
 
     //Products.findByIdAndDelete(productId)
     Products.updateOne({ _id: productId }, { disabled: true })

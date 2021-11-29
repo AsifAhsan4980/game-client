@@ -92,7 +92,11 @@ function TableList() {
                   <tbody>
                     {users && users.slice(0, visibleAdmin).map(user => {
                       if (user.role === 'admin') {
+<<<<<<< Updated upstream
                         if (user.disabled === false) {
+=======
+                        if(user.disabled === false){
+>>>>>>> Stashed changes
                           return (
                             <tr>
                               <td>{user.username}</td>
@@ -135,7 +139,11 @@ function TableList() {
                   <tbody>
                     {users && users.slice(0, visible).map((user, index) => {
                       if (user.role === 'admin' || user.role === 'user') {
+<<<<<<< Updated upstream
                         if (user.disabled === false) {
+=======
+                        if(user.disabled === false){
+>>>>>>> Stashed changes
                           return (
                             <tr>
                               <td>{user.username}</td>
