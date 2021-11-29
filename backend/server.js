@@ -5,8 +5,9 @@ const errorHandler = require('./middleware/error')
 const bodyparser = require("body-parser");
 const passport=require('passport');
 const cors=require("cors");
+const {getOneOrder} = require("./controllers/handleOrder");
 
-
+getOneOrder()
 
 connectDB();
 
