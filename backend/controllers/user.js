@@ -86,6 +86,7 @@ exports.updateUser = async (req, res) => {
 };*/
 
 exports.deleteUser = async (req, res) => {
+    console.log('Delete')
     const _id = req.params.id;
     await User.updateOne({ _id: _id }, { disabled: true });
     return res.status(200).send("Deleted!");
