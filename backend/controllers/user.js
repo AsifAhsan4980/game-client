@@ -184,3 +184,10 @@ exports.updateUserWallet = async (req, res) => {
     await User.updateOne({ _id: _id }, { wallet: wallet });
     return res.status(200).send("wallet updated!!");
 }
+
+exports.updateUserActiveStatus = async (req, res) => {
+    const _id = req.params.id;
+    const { activeStatus } = req.body;
+    await User.updateOne({ _id: _id }, { activeStatus: activeStatus });
+    return res.status(200).send("Active Status updated!!");
+}

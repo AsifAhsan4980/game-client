@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
     },
     activeStatus: {
         type: String,
-        default: 'Online'
+        default: 'inActive'
     },
     isActive: {
         type: Boolean,
