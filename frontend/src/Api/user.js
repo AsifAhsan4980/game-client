@@ -38,7 +38,7 @@ export const updateUserRole = (token,role) => {
     })
 }
 
-export const updateUserWallet = (activeStatus) => {
+export const updateUserActiveStatus = (activeStatus) => {
     const token = JSON.parse(localStorage.getItem('jwt'))
     const user = jwt_decode(token)
     const id = user.id;

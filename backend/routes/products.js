@@ -12,6 +12,6 @@ router.route('/').get( findAll);
 router.route('/:_id').get( findOne);
 router.route('/:_id').put(protect, update);
 router.route('/delete/:_id').put(protect, remove);
-router.route('/product/list').get(productList);
+router.route('/product/list/:id?array=[product]').get(productList);
 
 module.exports = router
