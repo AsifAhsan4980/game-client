@@ -24,7 +24,6 @@ export const updateUserWallet = (token,id,walletId) => {
 }
 
 export const getWalletById = (token,id) => {
-    console.log('Api',id)
     return axios.get(`http://localhost:3001/admin/wallet/${id}`,{
         headers:{
             "Content-Type":"application/json",

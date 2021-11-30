@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Button, ButtonGroup, Card, Col, Form, Row, ToggleButton } from "react-bootstrap";
 import { adminProfile } from "../Api/userAdmin";
 import { getAllProducts } from "../Api/products";
-import { updateUserWallet } from "../Api/user";
-import { activeAdminProducts } from "../Api/user";
+import { updateUserActiveStatus } from "../Api/user";
+import { activeAdminProducts } from "../Api/productArray";
+
 
 const OrderHandle = () => {
 
     const [product, setProduct] = useState(false);
     const [radioValue, setRadioValue] = useState('inActive');
     const [adminData, setAdminData] = useState([])
-    
+
+    const [productId, setProductId] = useState({
+        productId: ''
+    });
 
     const radios = [
         { name: 'InActive', value: 'inActive' },
@@ -41,13 +45,22 @@ const OrderHandle = () => {
 
     //console.log(product)
     const changeActiveStatus = value => {
-        updateUserWallet(value)
+        updateUserActiveStatus(value)
+        if (value === 'active') {
+            activeAdminProducts(productId.productId)
+        }
+
     }
 
-    const setId=id=>{
-        
+    const handleChange = (e) => {
+        setProductId({
+            ...productId,
+            [e.target.name]: e.target.value
+        })
     }
-    
+
+
+
     return (
         <>
             <Card>
@@ -67,7 +80,7 @@ const OrderHandle = () => {
                                             {
                                                 product && product.map((data, index) => {
                                                     return (
-                                                        <option onClick={setId(data.id)} key={index}>{data.gameName} {data.categoryName} </option>
+                                                        <option onClick={handleChange} key={index}>{data.gameName} {data.categoryName} </option>
                                                     )
                                                 }
                                                 )
