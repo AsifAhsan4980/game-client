@@ -39,10 +39,19 @@ app.use("/auth/google",require("./routes/authGoogleRouter"));
 app.use("/auth/facebook",require("./routes/authFacebookRouter"));
 app.use("/admin/banner", require("./routes/banner"));
 app.use("/count", require("./routes/visitors"));
+//app.use("/slide", require("./routes/slide"));
+
+
+// app.use("/create/purchase", require("./routes/purchase"));
+app.use('/addWallet', require("./routes/addWallet"))
+
 app.use("/admin/purchase", require("./routes/purchase"));
 app.use("/admin/addwallet", require("./routes/addWallet"));
 app.use("/admin/order", require("./routes/order"));
 app.use("/admin/wallet", require("./routes/wallet"));
+
+// app.use(/findOrder/, require("./routes/manageOrder"));
+
 
 app.use(errorHandler);
 

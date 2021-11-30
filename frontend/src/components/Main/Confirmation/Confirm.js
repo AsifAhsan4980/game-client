@@ -9,7 +9,9 @@ import { addWallet } from '../../../Api/addWallet';
 import { userInfo } from '../../../utils/auth';
 import { getOneUser } from '../../../Api/user';
 import { createNewPurchase } from '../../../Api/purchase';
+
 import { notify } from '../../../utils/notification'
+
 import { createNewOrder } from '../../../Api/order';
 
 const paymentMethod = [
@@ -203,6 +205,7 @@ const Confirm = () => {
                     }
                     if (values.amount >= amount) {
                         createNewPurchase(token, data)
+
                             .then(response => {
                                 const data = {
                                     userId: id,
@@ -215,6 +218,8 @@ const Confirm = () => {
 
                             })
                             .catch(err => notify('Something Failed! Please try again'))
+          
+
                     }
                 }
             })
