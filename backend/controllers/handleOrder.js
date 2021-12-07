@@ -2,10 +2,10 @@ const ErrorResponse = require("../utils/errorResponse")
 const User = require("../models/Auth");
 const {Order} = require("../models/Order");
 const Products = require("../models/Products");
-<<<<<<< Updated upstream
+
 const orderQueue = require('./')
 const adminQueue = require('./')
-=======
+
 
 const orderQueue = [
     {
@@ -25,7 +25,7 @@ const adminQueue = [{
         }
     ]
 }]
->>>>>>> Stashed changes
+
 const Wallet = require("../models/Wallet");
 const {Purchase} = require("../models/Purchase");
 
