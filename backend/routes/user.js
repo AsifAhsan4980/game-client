@@ -3,10 +3,11 @@ const {updateUser, deleteUser, getOneUser, getAllUser, getUserStats,updateUserRo
 const {protect} = require("../middleware/auth");
 const {verifyAllAdmin} = require("../middleware/verifyAllAdmin");
 const {verifySuperAdmin} = require("../middleware/verifySuperAdmin");
+const upload = require("../middleware/multer");
 
 const router = express.Router()
 
-router.route('/update/:id').put(protect,verifyAllAdmin, updateUser);
+router.route('/update/:id').put(protect,verifyAllAdmin,upload.single("image"), updateUser);
 router.route('/:id').delete(protect,verifySuperAdmin, deleteUser);
 router.route('/find/:id').get( getOneUser);
 router.route('/all_user').get(protect,verifyAllAdmin, getAllUser);

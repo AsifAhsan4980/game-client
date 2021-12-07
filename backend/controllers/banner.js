@@ -1,14 +1,12 @@
 const Banners = require('../models/Banner')
 const ErrorResponse = require("../utils/errorResponse")
 const Products = require("../models/Products");
-const upload = require('../middleware/multer');
+
 
 
 //create new product Item
 
 module.exports.createBanner = async (req, res) => {
-    upload(req, res, function (err) {
-        
         const { firstTitle, secondTitle } = req.body;
         const banner = new Banners({
             image: `media/img/${req.file.filename}`,
@@ -25,8 +23,6 @@ module.exports.createBanner = async (req, res) => {
                     message: err.message || "Some error occurred while creating a create operation"
                 });
             });
-        
-    })
 }
 
 exports.getImage = async (req, res) => {
