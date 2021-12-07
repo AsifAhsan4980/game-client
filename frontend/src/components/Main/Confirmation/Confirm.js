@@ -210,6 +210,7 @@ const Confirm = () => {
                                 const data = {
                                     userId: id,
                                     purchaseId: response.data.purchase._id,
+                                    productId:response.data.purchase.productId,
                                     walletId: values.walletId
                                 }
                                 createNewOrder(token, data)

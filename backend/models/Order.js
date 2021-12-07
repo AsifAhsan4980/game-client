@@ -16,5 +16,24 @@ module.exports.Order = model('Order', Schema({
         ref:'Purchase',
         required:true,
     },
+    productId:{
+        type:Schema.Types.ObjectId,
+        ref:'Products',
+        required:true,
+    },
+    handOver:{
+        type: Boolean,
+        default: false
+    },
+    isComplete:{
+        type: Boolean,
+        default: false
+    },
+    handleOverAdmin:{
+        type:Schema.Types.ObjectId,
+        ref:'Products',
+        default: null
+    },
+
 }, { timestamps: true }));
 

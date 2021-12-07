@@ -5,9 +5,16 @@ const errorHandler = require('./middleware/error')
 const bodyparser = require("body-parser");
 const passport=require('passport');
 const cors=require("cors");
+<<<<<<< Updated upstream
 
 
+=======
+//const {getOneOrder} = require("./controllers/handleOrder");
+const {orderQueue} = require("./controllers/orderQueue");
+>>>>>>> Stashed changes
 
+//getOneOrder()
+orderQueue()
 connectDB();
 
 const app = express()

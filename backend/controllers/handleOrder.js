@@ -2,8 +2,30 @@ const ErrorResponse = require("../utils/errorResponse")
 const User = require("../models/Auth");
 const {Order} = require("../models/Order");
 const Products = require("../models/Products");
+<<<<<<< Updated upstream
 const orderQueue = require('./')
 const adminQueue = require('./')
+=======
+
+const orderQueue = [
+    {
+        productId : "619d891e093e766d4a2255b9",
+        orderId : "61a00fd3b162636c914dfdf1"
+    },
+    {
+        productId : "61a00fd3b162636c914dfdf1",
+        orderId : "61a00fd3b162636c914dfdf1"
+
+    }]
+const adminQueue = [{
+    adminId : "",
+    product :  [
+        {
+            productId : ""
+        }
+    ]
+}]
+>>>>>>> Stashed changes
 const Wallet = require("../models/Wallet");
 const {Purchase} = require("../models/Purchase");
 

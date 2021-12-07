@@ -4,6 +4,7 @@ const ErrorResponse = require("../utils/errorResponse");
 const bcrypt = require("bcryptjs");
 const upload = require('../middleware/multer');
 
+
 /*exports.updateUser = async (req, res) => {
     console.log("done")
     if (req.user.id === req.params.id) {
@@ -191,4 +192,13 @@ exports.updateUserActiveStatus = async (req, res) => {
     const { activeStatus } = req.body;
     await User.updateOne({ _id: _id }, { activeStatus: activeStatus });
     return res.status(200).send("Active Status updated!!");
+}
+
+exports.addProduct = async (req, res) => {
+    const { productList } = req.body;
+    await User.updateOne(
+        { _id: req.user.id },
+        { $set: { productList: productList } }
+    )
+    return res.status(200).send("Product added!!");
 }
