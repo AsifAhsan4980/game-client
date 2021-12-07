@@ -1,23 +1,21 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {Redirect} from "react-router-dom";
-import {getOneProducts} from "../../Api/products";
+import {getOneProducts, getProductImage, updateProductss} from "../../Api/products";
 import {isAuthenticated} from "../../utils/auth";
-import {adminProfile} from "../../Api/userAdmin";
-import {getProducts} from "../../Api";
 
 
 const ProductUpdate = (id) => {
-
+    const productId = id.id
     const [detailsList, setDetailsList] = useState([{
         region: '',
         platform: '',
         publisher: '',
     }]);
 
-    const [ inputList, setInputList] = useState([{
-        option: "Time",
-        price: "price"
+    const [inputList, setInputList] = useState([{
+        option: "",
+        price: ""
     }]);
 
     const {region, platform, publisher} = detailsList;
@@ -33,8 +31,6 @@ const ProductUpdate = (id) => {
     });
 
     const {gameName, categoryName, image, success, details, topUp} = updateProduct;
-
-
 
 
     const handleDetailChange = (e, index) => {
@@ -72,43 +68,40 @@ const ProductUpdate = (id) => {
     };
 
 
-    useEffect(() => {
-        getOneProducts(id)
-            .then((res) => {
+    useEffect(async () => {
+        await getOneProducts(productId)
+            .then((res) => {  
                 let allData = res.data
                 setUpdateProduct(allData)
-                localStorage.setItem('alldata', JSON.stringify(allData))
+                setDetailsList(allData.details[0])
+                setInputList(allData.topUp)
+                console.log(allData.image)
 
             })
             .catch((err) => {
                 console.log(err.response);
             });
     }, []);
-
-    useEffect(() => {
-        const data = localStorage.getItem('alldata')
-        if (data) {
-           setUpdateProduct(JSON.parse(data))
-        }
-    }, []);
-
+    const getImage = (image) => {
+        getProductImage(image)
+    }
     const handleSubmit = e => {
         e.preventDefault();
         console.log(updateProduct)
-        // addProductss({gameName, categoryName, details, topUp, image, region, platform, publisher, option, price})
-        //     .then(response => {
-        //         isAuthenticated(response.data.token, () => {
-        //             setAddProduct({
-        //                 gameName: '',
-        //                 categoryName: '',
-        //                 image: '',
-        //                 detail: detailsList,
-        //                 topUp: inputList,
-        //                 success: true,
-        //             })
-        //         })
-        //     })
-        //     .catch(err => console.log(err))
+        updateProductss(productId, updateProduct)
+            .then(response => {
+                isAuthenticated(response.data.token, () => {
+                    setUpdateProduct({
+                        gameName: '',
+                        categoryName: '',
+                        image: '',
+                        detail: detailsList,
+                        topUp: inputList,
+                        success: true,
+                    })
+                })
+            })
+            .catch(err => console.log(err))
     }
 
 
@@ -131,6 +124,7 @@ const ProductUpdate = (id) => {
                         </Form.Group>
                     </Col>
                     <Col>
+                        <img src={`http://localhost:3001/${updateProduct.images}`} alt="Product Image"/>
                         <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Default file input example</Form.Label>
                             <Form.Control type="file" value={image} name="image" onChange={handleChange}/>
@@ -141,8 +135,10 @@ const ProductUpdate = (id) => {
                     <Col>
                         <Form.Group className="mb-3" controlId="addGame">
                             <Form.Label>Region</Form.Label>
-                            <Form.Control type="region" name="region" placeholder="Region name" value={region}
-                                          required={true} onChange={e => handleDetailChange(e, 0)}/>
+                            <Form.Control type="region" name="region" placeholder="Region name"
+                                          value={region}
+                                          defaultValue={detailsList.region} required={true}
+                                          onChange={e => handleDetailChange(e, 0)}/>
                         </Form.Group>
                     </Col>
                     <Col>
@@ -161,28 +157,30 @@ const ProductUpdate = (id) => {
                     </Col>
                 </Row>
 
-                {inputList.map((x, i) => {
+                {inputList && inputList.map((x, index) => {
                     return (
-                        <Row key={i}>
+                        <Row key={index}>
                             <Col>
                                 <Form.Group className="mb-3" controlId="addCategory">
                                     <Form.Label>Product Option</Form.Label>
                                     <Form.Control type="option" name="option" placeholder="option"
-                                                  value={option} onChange={e => handleInputChange(e, i)}/>
+                                                  defaultValue={x.option}
+                                                  value={option} onChange={e => handleInputChange(e, index)}/>
                                 </Form.Group>
                             </Col>
                             <Col className="btn-box">
                                 <Form.Group className="mb-3" controlId="addCategory">
                                     <Form.Label>Product price</Form.Label>
                                     <Form.Control type="price" name="price" placeholder="Product price"
-                                                  value={price} onChange={e => handleInputChange(e, i)}/>
+                                                  defaultValue={x.price}
+                                                  value={price} onChange={e => handleInputChange(e, index)}/>
                                 </Form.Group>
                             </Col>
                             <Col className="mt-4">
                                 {inputList.length !== 1 && <Button
                                     className="mr10"
-                                    onClick={() => handleRemoveClick(i)}>Remove</Button>}
-                                {inputList.length - 1 === i && <Button key={i} onClick={handleAddClick}>Add</Button>}
+                                    onClick={() => handleRemoveClick(index)}>Remove</Button>}
+                                {inputList.length - 1 === index && <Button key={index} onClick={handleAddClick}>Add</Button>}
                             </Col>
                         </Row>
 
@@ -193,7 +191,7 @@ const ProductUpdate = (id) => {
 
                 <div>
                     <Button type="submit" variant="primary">
-                        Add new product
+                        Update product
                     </Button>
                 </div>
             </Form>

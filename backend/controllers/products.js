@@ -4,25 +4,25 @@ const upload = require('../middleware/multer');
 const _ = require('lodash');
 
 //create new product Item
-exports.create = async (req, res) => {
-    // validate request
-    if (!req.body) {
-        res.status(400).send({ message: "Content can not be emtpy!" });
-        return;
-    }
-    console.log()
-    const { gameName, categoryName, images, topUp, details, option, price, region, platform, publisher } = req.body;
+
+
+exports.update = async(req, res) => {
+    // console.log(req.file)
+    // const file = req.file.filename
 
     // new product
     try {
-        const updatedProduct = await Products.findByIdAndUpdate(
-            req.params.id,
-            {
-                $set: req.body,
-            },
-            { new: true }
-        );
-        res.status(200).json(updatedProduct);
+        upload(req, async function (err) {
+            const updatedProduct = await Products.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $set: req.body
+                },
+                {new: true}
+            );
+            res.status(200).json(updatedProduct);
+        })
+
     } catch (err) {
         res.status(500).json(err);
     }
@@ -52,42 +52,6 @@ exports.addProductImage = (req, res) => {
     })
 }
 
-/*exports.create = (req, res) => {
-    console.log('req.body', req.body)
-    upload(req, res, function (err) {
-        // validate request
-        if (!req.body) {
-            res.status(400).send({ message: "Content can not be emtpy!" });
-            return;
-        }
-
-        const { gameName, categoryName, topUp, details, option, price, region, platform, publisher } = req.body;
-        console.log('req.body', req.body)
-        console.log('req.file', req.file)
-        const product = new Products({
-            //images: `media/img/${req.file.filename}`,
-            gameName,
-            categoryName,
-            topUp,
-            details,
-            option,
-            price,
-            region,
-            platform,
-            publisher
-        })
-        product.save()
-            .then(data => {
-                //res.send(data)
-                res.status(200).send(data)
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Some error occurred while creating a create operation"
-                });
-            });
-    })
-}*/
 
 exports.getImage = async (req, res) => {
     const productId = req.params._id;
@@ -125,26 +89,26 @@ exports.findAll = (req, res) => {
 }
 
 // Update a food item by product id
-exports.update = (req, res) => {
-    if (!req.body) {
-        return res
-            .status(400)
-            .send({ message: "Data to update can not be empty" })
-    }
-
-    const id = req.params._id;
-    Products.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-        .then(data => {
-            if (!data) {
-                res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
-            } else {
-                res.send(data)
-            }
-        })
-        .catch(err => {
-            res.status(500).send({ message: "Error Update user information" })
-        })
-}
+// exports.update = (req, res) => {
+//     if (!req.body) {
+//         return res
+//             .status(400)
+//             .send({ message: "Data to update can not be empty" })
+//     }
+//
+//     const id = req.params._id;
+//     Products.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+//         .then(data => {
+//             if (!data) {
+//                 res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
+//             } else {
+//                 res.send(data)
+//             }
+//         })
+//         .catch(err => {
+//             res.status(500).send({ message: "Error Update user information" })
+//         })
+// }
 
 // Delete a food with specified product id in the request
 exports.remove = (req, res) => {

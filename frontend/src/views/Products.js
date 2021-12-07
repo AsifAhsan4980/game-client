@@ -24,14 +24,14 @@ const Products = () => {
             });
     }, []);
 
-    console.log('product',product)
+    // console.log('product',product)
     return (
         <>
             <Button variant="primary" className="mb-4" onClick={handleShow}>
                 Add Products
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>

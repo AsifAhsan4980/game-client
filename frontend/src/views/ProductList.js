@@ -22,8 +22,6 @@ const ProductList = ({data}) => {
     const handleShow = () => setUpdate(true);
 
     const handleSubmit = () => {
-
-        console.log(id)
         deleteOneProducts(id)
             .then((response) => {
                 setSuccess(true),
@@ -36,6 +34,10 @@ const ProductList = ({data}) => {
     }
     const handleShowDelete = () => setRemove(true);
 
+
+    function updateProduct(e) {
+        handleShow(id)
+    }
 
     return (
         <Fragment>
@@ -56,7 +58,7 @@ const ProductList = ({data}) => {
                             <Row className='mt-4'>
                                 <Col className="text-center text-lg">
                                     <Button variant="light">
-                                        <AiOutlineEdit onClick={e => handleShow(e, data._id)} size={24}/>
+                                        <AiOutlineEdit onClick={e => updateProduct(e)} size={24}/>
                                     </Button>
                                 </Col>
                                 <Col className="text-center">
@@ -139,7 +141,7 @@ const ProductList = ({data}) => {
                                 })}
                             </Row>
                             <Form>
-                                <Modal show={update} onHide={handleClose}>
+                                <Modal size="lg" show={update} onHide={handleClose}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>Update Product</Modal.Title>
                                     </Modal.Header>
@@ -155,7 +157,7 @@ const ProductList = ({data}) => {
                                 </Modal>
                             </Form>
 
-                            <Modal show={remove} onHide={handleCloseDelete}>
+                            <Modal  show={remove} onHide={handleCloseDelete}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Delete Item</Modal.Title>
                                 </Modal.Header>

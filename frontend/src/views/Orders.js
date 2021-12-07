@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Card, Col, Container, Row, Table } from "react-bootstrap";
-import { getAllPurchase } from "../Api/purchase";
-import { userInfo } from '../utils/auth';
+import React, {useEffect, useState} from "react";
+import {Card, Col, Container, Row, Table} from "react-bootstrap";
+import {getAllPurchase} from "../Api/purchase";
+import {userInfo} from '../utils/auth';
+import moment from "moment";
 
 
 const Orders = () => {
@@ -9,11 +10,15 @@ const Orders = () => {
     const userDetails = userInfo();
 
     useEffect(() => {
-        getAllPurchase(userDetails.token)
-            .then(response => setPurchase(response.data))
-            .catch(console.log('Failed to load!'));
-    }, [])
+        try {
+            getAllPurchase(userDetails.token)
+                .then(response => setPurchase(response.data))
+        } catch (err) {
+            console.log(err)
+        }
 
+    }, [])
+    console.log(purchase)
     return (
         <>
             <Container fluid>
@@ -44,9 +49,9 @@ const Orders = () => {
                                                 return (
                                                     <tr>
                                                         <td>{index + 1}</td>
-                                                        <td>{purchase.createdAt}</td>
-                                                        <td>{purchase.productId}</td>
-                                                        <td>{purchase.Number} ({purchase.accountTye})</td>
+                                                        <td>{moment(purchase.createdAt).format('MMMM Do, YYYY, h:mm:ss a')}</td>
+                                                        <td>{purchase.productId.gameName}</td>
+                                                        <td>{purchase.Number} ({purchase.accountType})</td>
                                                         <td>{purchase.product}</td>
                                                         <td>{purchase.transactionID} ({purchase.paymentType})</td>
                                                     </tr>
@@ -84,9 +89,9 @@ const Orders = () => {
                                                 return (
                                                     <tr>
                                                         <td>{index + 1}</td>
-                                                        <td>{purchase.createdAt}</td>
-                                                        <td>{purchase.productId}</td>
-                                                        <td>{purchase.Number} ({purchase.accountTye})</td>
+                                                        <td>{moment(purchase.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</td>
+                                                        <td>{purchase.productId.gameName}</td>
+                                                        <td>{purchase.Number} ({purchase.accountType})</td>
                                                         <td>{purchase.product}</td>
                                                         <td>{purchase.transactionID} ({purchase.paymentType})</td>
                                                     </tr>
