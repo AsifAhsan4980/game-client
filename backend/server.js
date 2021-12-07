@@ -5,10 +5,15 @@ const errorHandler = require('./middleware/error')
 const bodyparser = require("body-parser");
 const passport=require('passport');
 const cors=require("cors");
-const {getOneOrder} = require("./controllers/handleOrder");
 
-getOneOrder()
+//const {getOneOrder} = require("./controllers/handleOrder");
+const {orderQueue} = require("./controllers/orderQueue");
 
+
+
+
+//getOneOrder()
+orderQueue()
 connectDB();
 
 const app = express()

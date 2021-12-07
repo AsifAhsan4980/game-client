@@ -13,7 +13,8 @@ exports.register = async (req, res, next) => {
             email,
             phonenumber,
             password,
-            walletId
+            walletId,
+            productList:[]
         });
 
         sendToken(user, 200, res);

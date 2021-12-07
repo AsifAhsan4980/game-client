@@ -1,5 +1,5 @@
 const express = require('express')
-const {updateUser, deleteUser, getOneUser, getAllUser, getUserStats,updateUserRole,updateUserWallet,updateUserActiveStatus} = require('../controllers/user')
+const {updateUser, deleteUser, getOneUser, getAllUser, getUserStats,updateUserRole,updateUserWallet,updateUserActiveStatus,addProduct} = require('../controllers/user')
 const {protect} = require("../middleware/auth");
 const {verifyAllAdmin} = require("../middleware/verifyAllAdmin");
 const {verifySuperAdmin} = require("../middleware/verifySuperAdmin");
@@ -14,5 +14,6 @@ router.route('/stats').get(protect, verifyAllAdmin, getUserStats)
 router.route('/roleUpdate/:id').put(protect,verifySuperAdmin, updateUserRole);
 router.route('/walletUpdate/:id').put(protect,updateUserWallet);
 router.route('/activeStatusUpdate/:id').put(protect,updateUserActiveStatus);
+router.route('/add/product').put(protect,addProduct);
 
 module.exports = router

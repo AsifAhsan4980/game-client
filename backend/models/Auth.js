@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    wallet:{
+    wallet: {
         type: Schema.Types.ObjectId,
         ref: "Wallet",
         default: null
@@ -59,6 +59,12 @@ const UserSchema = new mongoose.Schema({
         enum: ['admin', 'user'],
         default: 'user'
     },
+    productList: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Products'
+        }
+    ],
     disabled: {
         type: Boolean,
         default: false
