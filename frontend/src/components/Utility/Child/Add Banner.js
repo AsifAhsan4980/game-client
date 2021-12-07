@@ -4,8 +4,6 @@ import { addBanners } from "../../../Api/utility";
 import { userInfo } from '../../../utils/auth';
 
 const AddBanner = () => {
-    const [addImage, setImage] = useState(null)
-    const [loading, setLoading] = useState(false)
     const [addBanner, setAddBanner] = useState({
         firstTitle: '',
         secondTitle: '',
@@ -30,19 +28,6 @@ const AddBanner = () => {
             [e.target.name]: value,
         })
     }
-
-    /*const fileSelectedHandler = e => {
-        const files = e.target.files
-        const formData = new FormData()
-        formData.append("image", files[0])
-        // // formData.append('uploadPreset', 'darwin')
-        // addBanners(formData) .then(res=> {
-        //     isAuthenticated(res.data.token), () =>
-        // })
-
-        console.log(formData)
-        // console.log(e.target.files[0])
-    }*/
 
 
     const handleSubmit = e => {
