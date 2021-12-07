@@ -7,7 +7,7 @@ const passport=require('passport');
 const cors=require("cors");
 const {getOneOrder} = require("./controllers/handleOrder");
 
-getOneOrder()
+// getOneOrder()
 
 connectDB();
 

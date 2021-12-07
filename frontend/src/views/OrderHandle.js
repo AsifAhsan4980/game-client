@@ -10,6 +10,30 @@ const OrderHandle = () => {
 
     const [adminData, setAdminData] = useState([])
 
+    const [inputList, setInputList] = useState([{
+        productId: " "
+    }]);
+
+
+    const [getOrder, setGetOrder] = useState({
+        adminId: '',
+        product: []
+    })
+    const {productId} = inputList;
+
+
+
+    const handleRemoveClick = index => {
+        const list = [...inputList];
+        list.splice(index, 1);
+        setInputList(list);
+    };
+
+    const handleAddClick = () => {
+        setInputList([...inputList, {
+            productId: ""
+        }])
+    };
     const radios = [
         {name: 'InActive', value: '1'},
         {name: 'Active', value: '2'},
@@ -36,7 +60,25 @@ const OrderHandle = () => {
                 console.log(err.response);
             });
     }, []);
-    console.log(product)
+
+    const handleInputChange = (e, index) => {
+        const {name, value} = e.target;
+        const list = [...inputList];
+        list[index][name] = value;
+        setInputList(list);
+        setGetOrder({
+            ...getOrder,
+            product: inputList
+        })
+    };
+
+    //console.log(product)
+    const changeActiveStatus = value => {
+        updateUserWallet(value)
+    }
+    console.log(getOrder)
+
+
     return (
         <>
             <Card>
@@ -67,6 +109,39 @@ const OrderHandle = () => {
                                         <Button>Add</Button>
                                     </Col>
                                 </Row>
+
+                                <Form.Label>Select Category</Form.Label>
+                                    {inputList.map((x, i) => {
+                                        return (
+                                            <Row key={i}>
+                                                <Col lg={9}>
+                                                    <Form.Group className="mb-3" controlId="addCategory">
+                                                        <Form.Control as="select" aria-label="Default select example"
+                                                                      defaultValue="State..."
+                                                                      name="productId" value={productId} onChange={e => handleInputChange(e, i)}>
+                                                            <option>Select your Product</option>
+                                                            {
+                                                                product && product.map((data, index) => {
+                                                                        return (
+                                                                            <option id={data._id} key={index} className="text-black">{data._id}</option>
+                                                                        )
+                                                                    }
+                                                                )
+                                                            }
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                </Col>
+
+                                                <Col className="mt-4">
+                                                    {inputList.length !== 1 && <Button
+                                                        className="mr10"
+                                                        onClick={() => handleRemoveClick(i)}>Remove</Button>}
+                                                    {inputList.length - 1 === i && <Button key={i} onClick={handleAddClick}>Add</Button>}
+                                                </Col>
+                                            </Row>
+                                        )
+                                    })}
+
                             </Form>
                         </Col>
                         <Col>

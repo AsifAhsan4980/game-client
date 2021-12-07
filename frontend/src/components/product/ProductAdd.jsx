@@ -6,8 +6,8 @@ import { addProductss, addProductImage, getOneProducts } from "../../Api/product
 
 const ProductAdd = () => {
     const [inputList, setInputList] = useState([{
-        option: "Time",
-        price: "price"
+        option: "",
+        price: ""
     }]);
 
     const [detailsList, setDetailsList] = useState([{

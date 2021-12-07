@@ -23,7 +23,7 @@ export const addProductImage = (addProduct) => {
 export const getOneProducts = (id) => {
     console.log(id)
     return axios.get(
-        `http://localhost:3001/admin/product/6189292932ade79dfada481a`
+        `http://localhost:3001/admin/product/${id}`
     );
 };
 
@@ -34,10 +34,10 @@ export const getAllProducts = () => {
     );
 };
 
-export const updateProductss = (addProduct) => {
+export const updateProductss = (id, addProduct) => {
 
     const token = JSON.parse(localStorage.getItem('jwt'))
-    return axios.post("http://localhost:3001/admin/product", addProduct, {
+    return axios.put(`http://localhost:3001/admin/product/${id}`, addProduct, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -57,3 +57,8 @@ export const deleteOneProducts = (id) => {
         }
     );
 };
+
+export const getProductImage =  (image)=> {
+    console.log(image)
+    const token = JSON.parse(localStorage.getItem('jwt'))
+}

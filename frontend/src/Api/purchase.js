@@ -12,7 +12,7 @@ export const createNewPurchase = (token,data) => {
 }
 
 export const getAllPurchaseById = (token,id) => {
-    return axios.get(`http://localhost:3001/purchase/${id}`,{
+    return axios.get(`http://localhost:3001/admin/purchase/${id}`,{
         headers:{
             "Content-Type":"application/json",
             "Authorization":`Bearer ${token}`
@@ -21,7 +21,7 @@ export const getAllPurchaseById = (token,id) => {
 }
 
 export const getAllPurchase = (token) => {
-    return axios.get("http://localhost:3001/purchase/",{
+    return axios.get("http://localhost:3001/admin/purchase/",{
         headers:{
             "Content-Type":"application/json",
             "Authorization":`Bearer ${token}`

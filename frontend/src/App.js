@@ -38,9 +38,9 @@ const App = () => {
                 <Route exact path="/profile" component={UserProfile}/>
                 <Route exact path="/userWallet" component={UserWallet}/>
                 <Route exact path="/myOrder" component={MyOrder}/>
-
+                <Footer/>
             </Switch>
-            <Footer/>
+
         </AuthProvider>
     )
 }

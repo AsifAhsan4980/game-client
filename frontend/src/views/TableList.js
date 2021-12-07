@@ -92,7 +92,7 @@ function TableList() {
                   <tbody>
                     {users && users.slice(0, visibleAdmin).map(user => {
                       if (user.role === 'admin') {
-                        if (user.disabled === false) {
+                        if(user.disabled === false){
                           return (
                             <tr>
                               <td>{user.username}</td>
@@ -135,7 +135,7 @@ function TableList() {
                   <tbody>
                     {users && users.slice(0, visible).map((user, index) => {
                       if (user.role === 'admin' || user.role === 'user') {
-                        if (user.disabled === false) {
+                        if(user.disabled === false){
                           return (
                             <tr>
                               <td>{user.username}</td>
