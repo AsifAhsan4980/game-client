@@ -1,27 +1,20 @@
 const Products = require('../models/Products')
 const ErrorResponse = require("../utils/errorResponse")
-const upload = require('../middleware/multer');
 const _ = require('lodash');
 
 //create new product Item
 
 
-exports.update = async(req, res) => {
-    // console.log(req.file)
-    // const file = req.file.filename
-
-    // new product
+exports.update = async (req, res) => {
     try {
-        upload(req, async function (err) {
-            const updatedProduct = await Products.findByIdAndUpdate(
-                req.params.id,
-                {
-                    $set: req.body
-                },
-                {new: true}
-            );
-            res.status(200).json(updatedProduct);
-        })
+        const updatedProduct = await Products.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set: req.body
+            },
+            { new: true }
+        );
+        res.status(200).json(updatedProduct);
 
     } catch (err) {
         res.status(500).json(err);
@@ -30,26 +23,23 @@ exports.update = async(req, res) => {
 }
 
 exports.addProductImage = (req, res) => {
-    upload(req, res, function (err) {
-        const { gameName, categoryName } = req.body;
+    const { gameName, categoryName } = req.body;
 
-        const product = new Products({
-            gameName,
-            categoryName,
-            images: `media/img/${req.file.filename}`,
-        })
-        product.save()
-            .then(data => {
-                //res.send(data)
-                res.status(200).send(data)
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: err.message || "Some error occurred while creating a create operation"
-                });
-            });
-
+    const product = new Products({
+        gameName,
+        categoryName,
+        images: `media/img/${req.file.filename}`,
     })
+    product.save()
+        .then(data => {
+            //res.send(data)
+            res.status(200).send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating a create operation"
+            });
+        });
 }
 
 
