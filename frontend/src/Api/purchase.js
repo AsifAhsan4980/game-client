@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export const createNewPurchase = (token,data) => {
-    console.log('data', token)
+    console.log('Data',data)
     return axios.post(`http://localhost:3001/admin/purchase/`,data,{
         headers:{
             "Content-Type":"application/json",

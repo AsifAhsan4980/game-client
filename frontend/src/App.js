@@ -15,7 +15,8 @@ import UserProfile from "./components/Main/User/UserProfile";
 import NavBar from "./layouts/NavBar";
 import UserWallet from "./components/Main/User/UserWallet";
 import MyOrder from "./components/Main/User/MyOrder";
-import Footer from './components/Main/Footer/index'
+import Footer from './components/Main/Footer/index';
+import Notification from './components/Main/User/Notification';
 
 const App = () => {
     return (
@@ -34,7 +35,7 @@ const App = () => {
                 <Route exact path="/category/:id/:name/conformation" component={Confirmation}/>
 
                 <Route exact path="/confirmation" component={Confirm}/>
-
+                <Route exact path="/notification" component={Notification}/>
                 <Route exact path="/profile" component={UserProfile}/>
                 <Route exact path="/userWallet" component={UserWallet}/>
                 <Route exact path="/myOrder" component={MyOrder}/>

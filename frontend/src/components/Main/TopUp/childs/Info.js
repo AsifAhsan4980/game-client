@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, Redirect } from "react-router-dom";
-import { Badge, Card, Col, Form, Row, Fl } from "react-bootstrap";
+import { Badge, Card, Col, Form, Row, Fl, Modal } from "react-bootstrap";
 import { getProducts } from "../../../../Api";
 import "./gameinfo.css"
 import styled from 'styled-components';
 import Confirmation from '../../../../components/Main/Confirmation/Confirm';
 import { isAuthenticated } from '../../../../utils/auth';
-import { createNewPurchase } from '../../../../Api/purchase';
+import { getOneUser } from '../../../../Api/user';
 import { userInfo } from '../../../../utils/auth';
+import NotificationModal from './NotificationModal';
+import { createWallet, updateUserWallet, getWalletById } from '../../../../Api/wallet';
 
 const Button = styled.button`
   background-color: #001651;
@@ -55,18 +57,25 @@ const GameInfo = (props) => {
         accountType: ''
     }
     )
-    
+    const [user, setUser] = useState({})
     const [topUp, setTopUP] = useState([])
-    const [id, setId] = useState('')
     const [active, setActive] = useState(topUp[0]);
     const idData = useParams()
     const sid = idData.id
-    const productId=idData.productId
+    const productId = idData.productId
     const { accountName } = account
-    const {token} = userInfo();
+    const [show, setShow] = useState(false);
+    const [msg, setMsg] = useState('');
+    const [isWallet, setIsWallet] = useState(false);
+    const [walletId, setWalletId] = useState('');
+    const [balance, setBalance] = useState({});
+    const [recharge, setRecharge] = useState(0);
+
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true);
 
     const [values, setValues] = useState({
-        productId:productId,
+        productId: productId,
         accountType: '',
         Number: '',
         Password: '',
@@ -80,10 +89,10 @@ const GameInfo = (props) => {
         setAccountType({
             ...accountSelect,
             [e.target.name]: e.target.value,
-
         })
         console.log(accountSelect)
     }
+
 
     function func2(option, price) {
         setValues({
@@ -93,6 +102,57 @@ const GameInfo = (props) => {
             },
         })
     }
+
+    function createNewWallet() {
+        const { token, id } = userInfo();
+        createWallet(id)
+            .then(response => updateUserWallet(token, id, response.data.wallet._id))
+            .then(response => setIsWallet(true))
+            .then(response => setMsg('Do You want to recharge your wallet?'))
+    }
+
+    function addBalance() {
+        window.location = "http://localhost:3000/confirmation";
+    }
+
+    useEffect(() => {
+        getProducts()
+            .then((res) => {
+                let allData = res.data[sid]
+                let topUpData = allData.topUp;
+                setTopUP(topUpData)
+            })
+            .catch((err) => {
+                console.log(err.response);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (isAuthenticated()) {
+            const { token, id } = userInfo();
+            getOneUser(token, id)
+                .then(response => { setUser(response.data), setWalletId(response.data.wallet) })
+                .catch((err) => {
+                    console.log(err.response);
+                });
+        }
+
+    }, [user]);
+
+    useEffect(() => {
+        if (isAuthenticated()) {
+            const { token } = userInfo();
+            getWalletById(token, walletId)
+                .then(response => setBalance(response.data))
+                .catch((err) => {
+                    console.log(err.response);
+                });
+        }
+    }, [walletId]);
+
+    useEffect(() => {
+        localStorage.removeItem('values');
+    }, []);
 
     useEffect(() => {
         getProducts()
@@ -115,23 +175,45 @@ const GameInfo = (props) => {
     }
 
     const handleSubmit = (e) => {
+
         if (!isAuthenticated()) {
             window.location = "http://localhost:3000/login";
         }
 
-        console.log('Values', values)
-        //localStorage.setItem('values', JSON.stringify(values))
-        createNewPurchase(token,values)
+        if (user && user.wallet === null) {
+            handleShow()
+            setMsg('Do You want to create your wallet?')
+        }
+        let amount = 0
+        for (let x in product) {
+            amount = product[x]
+        }
+
+        if (user && user.wallet != null) {
+            if (balance.totalAmount < amount) {
+                const due = amount - balance.totalAmount
+                setIsWallet(true)
+                setMsg(`You Need  BDT ${due} to purchase the product. Do you want to recharge?`)
+                handleShow()
+            }
+        }
+
+
+        localStorage.setItem('values', JSON.stringify(values))
+        //createNewPurchase(token, values)
+        //.then(response=>console.log('Response',response.data.purchase._id))
+
     }
-    console.log('ID',id)
+
     return (
+
         <>
+            <NotificationModal show={show} msg={msg} handleClose={handleClose} createNewWallet={createNewWallet} addBalance={addBalance} isWallet={isWallet} />
             <div as={Form}>
                 <Card className="mb-4">
                     <Card.Body>
                         <Row>
                             <Col>
-
                                 <Form.Label>Account Type</Form.Label>
                                 <Form.Control as="select" aria-label="Default select example" defaultValue="State..."
                                     value={accountType} name="accountType" onChange={handleChange}>

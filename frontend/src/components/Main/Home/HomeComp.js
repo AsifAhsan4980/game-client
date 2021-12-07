@@ -16,7 +16,7 @@ const HomeComp = () => {
                                 <div id="example" class="home_banner_wrapper rounded-r-[6px] rounded-l-[6px] md:mt-0 md:rounded-none">
                                     <div class="block home_banner_and_category_wrapper">
                                         <div>
-                                            <Carousol/>
+                                            <Carousol />
                                         </div>
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@ const HomeComp = () => {
 
                             <div class="flex items-center mb-4 justify-between flex-wrap">
                                 <h3 class="uppercase h_3">New Games</h3>
-                                <GameCart/>
+                                <GameCart />
                             </div>
                         </section>
                     </div>

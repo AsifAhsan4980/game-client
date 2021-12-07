@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const {Schema} = require("mongoose");
+const { Schema } = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema({
     },
     activeStatus: {
         type: String,
-        default: 'Online'
+        default: 'inActive'
     },
     isActive: {
         type: Boolean,
@@ -47,22 +47,24 @@ const UserSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String,
-        default:null
+        default: null
     },
-
-    wallet:{
+    wallet: {
         type: Schema.Types.ObjectId,
         ref: "Wallet",
-        default:null
+        default: null
     },
     role: {
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
     },
-    walletId: {
-        type: String
-    },
+    productList: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Products'
+        }
+    ],
     disabled: {
         type: Boolean,
         default: false

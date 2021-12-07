@@ -123,13 +123,12 @@ const TopNav = () => {
                                                 <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
                                                     <AiOutlineUser />
                                                 </Dropdown.Toggle>
-
                                                 <Dropdown.Menu as={CustomMenu}>
                                                     <Dropdown.Item eventKey="1"><Link to='profile'>My Profile</Link></Dropdown.Item>
                                                     <Dropdown.Item eventKey="2"><Link to='userWallet'>  My Wallet</Link></Dropdown.Item>
-
-                                                    <Dropdown.Item eventKey="3"><Link to='userWallet'>Add Wallet</Link></Dropdown.Item>
+                                                    <Dropdown.Item eventKey="3"><Link to='/confirmation'>Add Wallet</Link></Dropdown.Item>
                                                     <Dropdown.Item eventKey="4"><Link to='myOrder'>My Order</Link> </Dropdown.Item>
+                                                    <Dropdown.Item eventKey="4"><Link to='/notification'>Notification</Link> </Dropdown.Item>
                                                     <Dropdown.Item eventKey="5">Support</Dropdown.Item>
                                                     <Dropdown.Item eventKey="6">Logout</Dropdown.Item>
                                                 </Dropdown.Menu>
@@ -179,6 +178,16 @@ const TopNav = () => {
                                                                 </v-icon>
                                                             </div>
                                                             My order
+                                                        </div>
+                                                    </a></li>
+                                                    <li data-v-c42a92a2 data-v-70c6da4e><a href="profile/order.html"
+                                                        data-v-c42a92a2>
+                                                        <div className="li_style" data-v-c42a92a2>
+                                                            <div className="w-5 h-5 mr-3" data-v-c42a92a2>
+                                                                <v-icon name="bar-chart-2" data-v-c42a92a2>
+                                                                </v-icon>
+                                                            </div>
+                                                            Notification
                                                         </div>
                                                     </a></li>
                                                     <li data-v-c42a92a2 data-v-70c6da4e><a href="contact.html"

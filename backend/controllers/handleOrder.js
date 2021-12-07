@@ -2,6 +2,10 @@ const ErrorResponse = require("../utils/errorResponse")
 const User = require("../models/Auth");
 const {Order} = require("../models/Order");
 const Products = require("../models/Products");
+
+const orderQueue = require('./')
+const adminQueue = require('./')
+
 const orderQueue = [
     {
         productId : "619d891e093e766d4a2255b9",
@@ -20,6 +24,7 @@ const adminQueue = [{
         }
     ]
 }]
+
 const Wallet = require("../models/Wallet");
 const {Purchase} = require("../models/Purchase");
 

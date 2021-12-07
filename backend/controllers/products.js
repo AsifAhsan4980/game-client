@@ -5,6 +5,7 @@ const _ = require('lodash');
 
 //create new product Item
 
+
 exports.update = async(req, res) => {
     // console.log(req.file)
     // const file = req.file.filename
@@ -32,7 +33,6 @@ exports.addProductImage = (req, res) => {
     upload(req, res, function (err) {
         const { gameName, categoryName } = req.body;
 
-
         const product = new Products({
             gameName,
             categoryName,
@@ -48,6 +48,7 @@ exports.addProductImage = (req, res) => {
                     message: err.message || "Some error occurred while creating a create operation"
                 });
             });
+
     })
 }
 
@@ -79,13 +80,12 @@ exports.findOne = (req, res) => {
 }
 // retrieve and return a single product item
 exports.findAll = (req, res) => {
-
     Products.find()
         .then(menu => {
             res.send(menu)
         }).catch(err => {
-        res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
-    })
+            res.status(500).send({ message: err.message || "Error Occurred while retrieving user information" })
+        })
 }
 
 // Update a food item by product id
@@ -113,6 +113,17 @@ exports.findAll = (req, res) => {
 // Delete a food with specified product id in the request
 exports.remove = (req, res) => {
     const productId = req.params._id
+    Products.updateOne({ _id: productId }, { disabled: true })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
+            } else {
+                res.send(data)
+            }
+        })
+        .catch(err => {
+            res.status(500).send({ message: "Error Update user information" })
+        })
 
     //Products.findByIdAndDelete(productId)
     Products.updateOne({ _id: productId }, { disabled: true })

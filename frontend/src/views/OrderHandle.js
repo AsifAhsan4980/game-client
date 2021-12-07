@@ -1,42 +1,26 @@
-import React, {useEffect, useState} from "react";
-import {Button, ButtonGroup, Card, Col, Form, Row, ToggleButton} from "react-bootstrap";
-import {adminProfile} from "../Api/userAdmin";
-import {getAllProducts} from "../Api/products";
+import React, { useEffect, useState } from "react";
+import { Button, ButtonGroup, Card, Col, Form, Row, ToggleButton } from "react-bootstrap";
+import { adminProfile } from "../Api/userAdmin";
+import { getAllProducts } from "../Api/products";
+import { updateUserActiveStatus } from "../Api/user";
+import { activeAdminProducts } from "../Api/productArray";
+
 
 const OrderHandle = () => {
 
     const [product, setProduct] = useState(false);
-    const [radioValue, setRadioValue] = useState('1');
-
+    const [radioValue, setRadioValue] = useState('inActive');
     const [adminData, setAdminData] = useState([])
 
-    const [inputList, setInputList] = useState([{
-        productId: " "
-    }]);
+
+    const [productId, setProductId] = useState({
+        productId: ''
+    });
 
 
-    const [getOrder, setGetOrder] = useState({
-        adminId: '',
-        product: []
-    })
-    const {productId} = inputList;
-
-
-
-    const handleRemoveClick = index => {
-        const list = [...inputList];
-        list.splice(index, 1);
-        setInputList(list);
-    };
-
-    const handleAddClick = () => {
-        setInputList([...inputList, {
-            productId: ""
-        }])
-    };
     const radios = [
-        {name: 'InActive', value: '1'},
-        {name: 'Active', value: '2'},
+        { name: 'InActive', value: 'inActive' },
+        { name: 'Active', value: 'active' },
     ];
 
     useEffect(() => {
@@ -48,7 +32,7 @@ const OrderHandle = () => {
             .catch((err) => {
                 console.log(err.response);
             });
-    }, []);
+    }, [adminData]);
 
     useEffect(() => {
         getAllProducts()
@@ -61,22 +45,22 @@ const OrderHandle = () => {
             });
     }, []);
 
-    const handleInputChange = (e, index) => {
-        const {name, value} = e.target;
-        const list = [...inputList];
-        list[index][name] = value;
-        setInputList(list);
-        setGetOrder({
-            ...getOrder,
-            product: inputList
-        })
-    };
-
     //console.log(product)
     const changeActiveStatus = value => {
-        updateUserWallet(value)
+        updateUserActiveStatus(value)
+        if (value === 'active') {
+            activeAdminProducts(productId.productId)
+        }
+
     }
-    console.log(getOrder)
+
+    const handleChange = (e) => {
+        setProductId({
+            ...productId,
+            [e.target.name]: e.target.value
+        })
+    }
+
 
 
     return (
@@ -93,14 +77,14 @@ const OrderHandle = () => {
                                     <Col lg={10}>
                                         <Form.Label>Order Category</Form.Label>
                                         <Form.Control as="select" aria-label="Default select example"
-                                                      defaultValue="State..."
-                                                      name="type">
+                                            defaultValue="State..."
+                                            name="type">
                                             {
                                                 product && product.map((data, index) => {
-                                                        return (
-                                                            <option key={index}>{data.gameName} {data.categoryName}</option>
-                                                        )
-                                                    }
+                                                    return (
+                                                        <option onClick={handleChange} key={index}>{data.gameName} {data.categoryName} </option>
+                                                    )
+                                                }
                                                 )
                                             }
                                         </Form.Control>
@@ -155,8 +139,8 @@ const OrderHandle = () => {
                                         variant={idx % 2 ? 'outline-success' : 'outline-danger'}
                                         name="radio"
                                         value={radio.value}
-                                        checked={radioValue === radio.value}
-                                        onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                        checked={adminData.activeStatus === radio.value}
+                                        onChange={(e) => changeActiveStatus(e.currentTarget.value)}
                                     >
                                         {radio.name}
                                     </ToggleButton>
