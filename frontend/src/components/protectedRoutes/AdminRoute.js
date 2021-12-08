@@ -3,6 +3,7 @@ import { isAuthenticated ,userInfo} from '../../utils/auth';
 
 const AdminRoute = ({ children, ...rest }) => { 
     const {role}=userInfo();
+    console.log('children',children)
     return (
         <Route
             {...rest}
@@ -10,7 +11,7 @@ const AdminRoute = ({ children, ...rest }) => {
                 isAuthenticated() && role==='admin' || role==='superadmin'? (
                     children 
                 ) : (
-                    <Navigate end
+                    <Navigate replace
                         to={{
                             pathname: "/",
                             state: { from: location }
