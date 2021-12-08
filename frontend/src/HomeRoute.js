@@ -16,8 +16,9 @@ import NavBar from "./layouts/NavBar";
 const HomeRoute = () => {
     return (
         <><BrowserRouter>
-            <NavBar/>
+
             <Switch>
+                <NavBar/>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/category/:id/:name/:productId" component={TopUp}/>
                 <Route exact path="/login" component={Login}/>

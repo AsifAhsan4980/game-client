@@ -5,6 +5,7 @@ import AdminLayout from "./layouts/Admin";
 import {AuthProvider} from "./utils/auth";
 import HomeRoute from "./HomeRoute";
 
+
 const App = () => {
     return (
         <AuthProvider>
@@ -12,10 +13,9 @@ const App = () => {
                 <AdminRoute path="/admin">
                     <AdminLayout/>
                 </AdminRoute>
+                <Route><HomeRoute/></Route>
             </Switch>
-            <Switch>
-                <HomeRoute/>
-            </Switch>
+
 
 
         </AuthProvider>
