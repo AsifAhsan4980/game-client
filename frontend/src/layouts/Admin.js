@@ -16,7 +16,7 @@
 
 */
 import React, { Component } from "react";
-import { useLocation, Route, Switch } from "react-router-dom";
+import { useLocation, Outlet, Routes } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
@@ -37,7 +37,7 @@ function Admin() {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin") {
         return (
-          <Route
+          <Outlet
             path={prop.layout + prop.path}
             render={(props) => <prop.component {...props} />}
             key={key}
@@ -68,7 +68,7 @@ function Admin() {
         <div className="main-panel" ref={mainPanel}>
           <AdminNavbar />
           <div className="content">
-            <Switch>{getRoutes(routes)}</Switch>
+            <Routes>{getRoutes(routes)}</Routes>
           </div>
           <Footer />
         </div>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Row} from "react-bootstrap";
-import {Redirect} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {getOneProducts, getProductImage, updateProductss} from "../../Api/products";
 import {isAuthenticated} from "../../utils/auth";
 
@@ -201,7 +201,7 @@ const ProductUpdate = (id) => {
 
     const showSuccess = () => {
         if (success) return (
-            <Redirect to='/admin/product'/>
+            <Navigate to='/admin/product'/>
         )
     }
 

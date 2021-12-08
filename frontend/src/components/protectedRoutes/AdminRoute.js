@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import { isAuthenticated ,userInfo} from '../../utils/auth';
 
 const AdminRoute = ({ children, ...rest }) => { 
@@ -10,7 +10,7 @@ const AdminRoute = ({ children, ...rest }) => {
                 isAuthenticated() && role==='admin' || role==='superadmin'? (
                     children 
                 ) : (
-                    <Redirect
+                    <Navigate end
                         to={{
                             pathname: "/",
                             state: { from: location }
