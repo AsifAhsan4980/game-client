@@ -1,5 +1,8 @@
 import React from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+
+
 import Home from "./layouts/home";
 import TopUp from "./layouts/TopUp";
 import Login from "./layouts/Login";
@@ -17,22 +20,6 @@ const HomeRoute = () => {
     return (
         <><BrowserRouter>
 
-            <Switch>
-                <NavBar/>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/category/:id/:name/:productId" component={TopUp}/>
-                <Route exact path="/login" component={Login}/>
-                <Route exact path="/registration" component={Registration}/>
-                <Route exact path="/category/:id/:name/conformation" component={Confirmation}/>
-
-                <Route exact path="/confirmation" component={Confirm}/>
-                <Route exact path="/notification" component={Notification}/>
-                <Route exact path="/profile" component={UserProfile}/>
-                <Route exact path="/userWallet" component={UserWallet}/>
-                <Route exact path="/myOrder" component={MyOrder}/>
-
-            </Switch>
-            <Footer/>
         </BrowserRouter>
 
         </>

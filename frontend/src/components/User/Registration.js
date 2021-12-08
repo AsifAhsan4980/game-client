@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { registration } from '../../Api/auth';
 import { isAuthenticated } from '../../utils/auth';
 import { Form } from "react-bootstrap";
@@ -388,7 +388,7 @@ const Register = () => {
 
     return (
         <div>
-            {isAuthenticated() ? <Redirect to="/" /> : ""}
+            {isAuthenticated() ? <Navigate to="/" /> : ""}
             {showSuccess()}
             {signUpForm()}
             <hr />

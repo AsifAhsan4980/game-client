@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { login } from '../../Api/auth'
 import { authenticate } from '../../utils/auth';
 import {
@@ -139,7 +139,7 @@ const Login = () => {
 
     const showSuccess = () => {
         if (success) return (
-            <Redirect to='/admin' />
+            <Navigate to='/admin' />
         )
     }
 

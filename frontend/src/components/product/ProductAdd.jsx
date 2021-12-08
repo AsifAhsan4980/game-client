@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { addProductss, addProductImage, getOneProducts } from "../../Api/products";
 
 
@@ -194,7 +194,7 @@ const ProductAdd = () => {
 
     const showSuccess = () => {
         if (success) return (
-            <Redirect to='/admin/product' />
+            <Navigate to='/admin/product' />
         )
     }
 

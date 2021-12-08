@@ -17,6 +17,7 @@ const Carousol = () => {
             .then(response => setBanners(response.data))
     }, [])
 
+    
     return (
         <Carousel activeIndex={index} onSelect={handleSelect}>
             {banners && banners.map(banner => (

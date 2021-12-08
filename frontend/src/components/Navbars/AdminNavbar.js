@@ -162,7 +162,7 @@ function Header() {
                                 onClick={(e) => logout(e)}
 
                             >
-                                <Link  to="/login" className="no-icon">Log out</Link>
+                                <Link end to="/login" className="no-icon">Log out</Link>
                             </Nav.Link>
                         </Nav.Item>
                     </Nav>

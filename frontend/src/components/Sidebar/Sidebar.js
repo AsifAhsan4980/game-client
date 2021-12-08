@@ -49,6 +49,7 @@ function Sidebar({ color, image, routes }) {
                   key={key}
                 >
                   <NavLink
+                  end
                     to={prop.layout + prop.path}
                     className="nav-link"
                     activeClassName="active"
